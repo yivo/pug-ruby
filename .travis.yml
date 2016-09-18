@@ -1,5 +1,8 @@
 language: ruby
 
+rvm:
+  - 2.3
+
 cache: bundler
 
 branches:
