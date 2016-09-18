@@ -43,7 +43,7 @@ module Pug
 
     def check_executable!
       unless @executable_checked
-        `hash pug`
+        `pug --version`
         unless $?.success?
           raise ExecutableError, 'No pug executable found in your system. Did you forget to "npm install -g pug-cli"?'
         end
