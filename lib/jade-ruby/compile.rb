@@ -42,7 +42,7 @@ module Jade
 
     def check_executable!
       unless @executable_checked
-        `hash jade`
+        `jade --version`
         unless $?.success?
           raise ExecutableError, 'No jade executable found in your system. Did you forget to "npm install -g jade"?'
         end
