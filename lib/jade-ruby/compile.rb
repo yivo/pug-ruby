@@ -37,7 +37,12 @@ module Jade
 
       stdout, stderr, exit_status = Open3.capture3(*cmd, stdin_data: source)
       raise CompileError.new(stderr) unless exit_status.success?
-      stdout
+
+      if options[:client]
+        %{ (function(jade) { #{stdout}; return #{options[:name]}; }).call(this, jade); }
+      else
+        stdout
+      end
     end
 
     def check_executable!

@@ -37,8 +37,18 @@ module Pug
       cmd.push('--doctype',         escape(options[:doctype]))         if options[:doctype]
 
       stdout, stderr, exit_status = Open3.capture3(*cmd, stdin_data: source)
+
       raise CompileError.new(stderr) unless exit_status.success?
-      stdout
+
+      if options[:client]
+        if options[:inline_runtime_functions]
+          %{ (function() { #{stdout}; return #{options[:name]}; }).call(this); }
+        else
+          %{ (function(pug) { #{stdout}; return #{options[:name]}; }).call(this, pug); }
+        end
+      else
+        stdout
+      end
     end
 
     def check_executable!
