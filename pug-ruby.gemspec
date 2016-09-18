@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 Gem::Specification.new do |s|
   s.name            = 'pug-ruby'
-  s.version         = '1.0'
+  s.version         = '1.0.1'
   s.author          = 'Yaroslav Konoplov'
   s.email           = 'eahome00@gmail.com'
   s.summary         = 'Ruby wrapper for the Pug/Jade template engine.'
