@@ -1,10 +1,16 @@
 ## Ruby wrapper for the Pug/Jade template engine
 
 ## About
-This gem uses [pug-ruby](https://github.com/yivo/pug-ruby) to compile Pug/Jade templates. Please refer to that gem if you want to use Pug/Jade compiler directly.
+This gem is wrapper for Pug/Jade command line interface. You can compile both Jade templates ([version 1.x](https://github.com/pugjs/pug/tree/v1.x.x)) and Pug ([version 2.x](https://github.com/pugjs/pug)).
+<br>
+```ruby
+Jade.compile(source, options)
+Pug.compile(source, options)
+```
 
 ## Installing gem
 Run `gem install pug-ruby -v '~> 1.0'`. Add `require 'pug-ruby'` to your code.
+
 
 **If you are using bundler.**
 <br>
