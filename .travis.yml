@@ -12,5 +12,9 @@ branches:
 env:
   - RAILS_ENV=test RAKE_ENV=test
 
+before_script:
+  - npm install jade
+  - npm install pug-cli
+
 script:
   - bundle exec rake test
