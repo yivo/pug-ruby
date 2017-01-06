@@ -1,4 +1,6 @@
+# encoding: utf-8
 # frozen_string_literal: true
+
 module Jade
   class Config
     # http://web.archive.org/web/20160404025722/http://jade-lang.com/api/
