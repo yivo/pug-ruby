@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |s|
   s.name            = 'pug-ruby'
-  s.version         = '1.0.1'
+  s.version         = '1.0.2'
   s.author          = 'Yaroslav Konoplov'
   s.email           = 'eahome00@gmail.com'
   s.summary         = 'Ruby wrapper for the Pug/Jade template engine.'
@@ -11,7 +11,6 @@ Gem::Specification.new do |s|
   s.homepage        = 'https://github.com/yivo/pug-ruby'
   s.license         = 'MIT'
 
-  s.executables     = `git ls-files -z -- bin/*`.split("\x0").map{ |f| File.basename(f) }
   s.files           = `git ls-files -z`.split("\x0")
   s.test_files      = `git ls-files -z -- {test,spec,features}/*`.split("\x0")
   s.require_paths   = ['lib']
