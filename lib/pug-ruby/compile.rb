@@ -67,7 +67,7 @@ module Pug
         if version
           puts "pug version: #{version}"
         else
-          raise ExecutableError, 'No pug executable found in your system. Did you forget to "npm install -g pug-cli"?'
+          raise ExecutableError, 'No pug executable found in your system. Did you forget to "npm install --global pug-cli"?'
         end
         @executable_checked = true
       end

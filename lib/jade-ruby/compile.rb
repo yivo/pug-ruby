@@ -59,7 +59,7 @@ module Jade
         if version
           puts "jade version: #{version}"
         else
-          raise ExecutableError, 'No jade executable found in your system. Did you forget to "npm install -g jade"?'
+          raise ExecutableError, 'No jade executable found in your system. Did you forget to "npm install --global jade"?'
         end
         @executable_checked = true
       end
