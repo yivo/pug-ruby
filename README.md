@@ -1,5 +1,8 @@
 ## Ruby wrapper for the Pug/Jade template engine
 
+[![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
+[![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
+
 ## About
 This gem is wrapper for Pug/Jade command line interface. You can compile both Jade templates ([version 1.x](https://github.com/pugjs/pug/tree/v1.x.x)) and Pug ([version 2.x](https://github.com/pugjs/pug)).
 <br>
