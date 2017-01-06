@@ -1,20 +1,17 @@
 language: ruby
 
 rvm:
+  - 2.0.0
+  - 2.1.10
+  - 2.2.5
   - 2.3.1
+  - 2.4.0
 
 cache: bundler
-
-branches:
-  only:
-    - master
 
 env:
   - RAILS_ENV=test RAKE_ENV=test
 
-before_script:
-  - npm install jade
-  - npm install pug-cli
-
-script:
-  - bundle exec rake test
+before_install:
+  - npm install --global jade
+  - npm install --global pug-cli

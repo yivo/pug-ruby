@@ -40,7 +40,7 @@ module Pug
 
       stdout, stderr, exit_status = Open3.capture3(*cmd, stdin_data: source)
 
-      raise CompileError.new(stderr) unless exit_status.success?
+      raise CompileError, stderr unless exit_status.success?
 
       if options[:client]
         if options[:inline_runtime_functions]
@@ -53,10 +53,20 @@ module Pug
       end
     end
 
+    def version
+      @version ||= begin
+        output = `pug --version`
+        if $?.success?
+          output.split(/\n\r?/)[0].to_s['pug version: '.size..-1]
+        end
+      end
+    end
+
     def check_executable!
       unless @executable_checked
-        `pug --version`
-        unless $?.success?
+        if version
+          puts "pug version: #{version}"
+        else
           raise ExecutableError, 'No pug executable found in your system. Did you forget to "npm install -g pug-cli"?'
         end
         @executable_checked = true
@@ -65,7 +75,7 @@ module Pug
 
   protected
     def escape(string)
-      Shellwords.escape(string)
+      string.shellescape
     end
   end
 

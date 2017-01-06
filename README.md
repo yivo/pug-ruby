@@ -22,13 +22,13 @@ gem 'pug-ruby', '~> 1.0'
 ## Installing Jade
 Install Jade globally via npm:
 ```bash
-npm install -g jade
+npm install --global jade
 ```
 
 ## Installing Pug
 Install Pug globally via npm:
 ```bash
-npm install -g pug-cli
+npm install --global pug-cli
 ```
 
 ## Configuring Pug and Jade

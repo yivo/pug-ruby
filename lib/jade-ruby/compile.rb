@@ -38,7 +38,7 @@ module Jade
       cmd.push('--doctype',         escape(options[:doctype]))         if options[:doctype]
 
       stdout, stderr, exit_status = Open3.capture3(*cmd, stdin_data: source)
-      raise CompileError.new(stderr) unless exit_status.success?
+      raise CompileError, stderr unless exit_status.success?
 
       if options[:client]
         %{ (function(jade) { #{stdout}; return #{options[:name]}; }).call(this, jade); }
@@ -47,10 +47,18 @@ module Jade
       end
     end
 
+    def version
+      @version ||= begin
+        version = `jade --version`
+        version if $?.success?
+      end
+    end
+
     def check_executable!
       unless @executable_checked
-        `jade --version`
-        unless $?.success?
+        if version
+          puts "jade version: #{version}"
+        else
           raise ExecutableError, 'No jade executable found in your system. Did you forget to "npm install -g jade"?'
         end
         @executable_checked = true
@@ -59,7 +67,7 @@ module Jade
 
   protected
     def escape(string)
-      Shellwords.escape(string)
+      string.shellescape
     end
   end
 
