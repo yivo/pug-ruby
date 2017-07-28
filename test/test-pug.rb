@@ -1,9 +1,6 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
-require 'pug-ruby'
-require 'test/unit'
-
 class PugTest < Test::Unit::TestCase
 
   def test_compile
