@@ -1,1 +1,2 @@
 Bundler.require
+require 'stringio'
