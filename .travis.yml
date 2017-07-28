@@ -13,8 +13,8 @@ env:
   - RAKE_ENV=test
 
 before_install:
-  - npm install --global jade
-  - npm install --global pug-cli
+  - npm install --global jade@1.11.0
+  - npm install --global pug-cli@1.0.0-alpha6
   - gem install bundler
 
 install:
