@@ -4,3 +4,4 @@
 pkg/
 tmp/
 /.idea/
+/node_modules/
