@@ -7,15 +7,15 @@ rvm:
   - 2.3.4
   - 2.4.1
 
-node_js:
-  - 6
-
 cache: bundler
 
 env:
   - RAKE_ENV=test
 
 before_install:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
   - npm install --global jade@1.11.0
   - npm install --global pug-cli@1.0.0-alpha6
   - gem install bundler
