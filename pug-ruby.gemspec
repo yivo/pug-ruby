@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency             "execjs",                "~> 2.0"
   s.add_dependency             "memoist",               "~> 0.15"
-  s.add_dependency             "regexp-match-polyfill", "~> 1.0"
+  s.add_dependency             "regexp-match-polyfill", "~> 1.0", ">= 1.0.2"
   s.add_development_dependency "rake",                  "~> 10.0"
   s.add_development_dependency "test-unit",             "~> 3.1"
 end

@@ -4,7 +4,7 @@ PATH
     pug-ruby (1.0.2)
       execjs (~> 2.0)
       memoist (~> 0.15)
-      regexp-match-polyfill (~> 1.0)
+      regexp-match-polyfill (~> 1.0, >= 1.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -13,7 +13,7 @@ GEM
     memoist (0.16.0)
     power_assert (1.0.2)
     rake (10.5.0)
-    regexp-match-polyfill (1.0.1)
+    regexp-match-polyfill (1.0.2)
     test-unit (3.2.5)
       power_assert
 
@@ -26,4 +26,4 @@ DEPENDENCIES
   test-unit (~> 3.1)
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
