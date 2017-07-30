@@ -80,7 +80,8 @@ module JadePug
   # @return [Array<String>]
   def versions
     Dir[File.expand_path("../../../vendor/assets/javascripts/**/#{name.downcase}-*.js", __FILE__)].map do |path|
-      File.basename(path).match(/\A#{name.downcase}-(?!runtime-)(?<v>.+)\.min\.js\z/)&.send(:[], :v)
+      match = File.basename(path).match(/\A#{name.downcase}-(?!runtime-)(?<v>.+)\.min\.js\z/)
+      match[:v] if match
     end.compact.sort
   end
   memoize :versions
@@ -91,7 +92,8 @@ module JadePug
   # @return [Array<String>]
   def runtime_versions
     Dir[File.expand_path("../../../vendor/assets/javascripts/**/#{name.downcase}-*.js", __FILE__)].map do |path|
-      File.basename(path).match(/\A#{name.downcase}-runtime-(?<v>.+)\.js\z/)&.send(:[], :v)
+      match = File.basename(path).match(/\A#{name.downcase}-runtime-(?<v>.+)\.js\z/)
+      match[:v] if match
     end.compact.sort
   end
   memoize :runtime_versions
