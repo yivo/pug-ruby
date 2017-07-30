@@ -34,7 +34,7 @@ module JadePug
     # Checks if executable exists in $PATH.
     #
     # The method of check is described in this Stack Overflow answer:
-    # {https://stackoverflow.com/a/677212/2369428}
+    # {https://stackoverflow.com/a/3931779/2369428}
     #
     # @raise {Jade::ExecutableError, Pug::ExecutableError}
     #   If no executable found in the system.
@@ -42,7 +42,7 @@ module JadePug
     def check_executable!
       return if @executable_checked
 
-      stdout, stderr, exit_status = Open3.capture3("hash #{executable}")
+      stdout, stderr, exit_status = Open3.capture3("type", executable)
 
       if exit_status.success?
         @executable_checked = true
@@ -61,7 +61,7 @@ module JadePug
       @version ||= begin
         check_executable!
 
-        stdout, stderr, exit_status = Open3.capture3("#{executable} --version")
+        stdout, stderr, exit_status = Open3.capture3(executable, "--version")
 
         if exit_status.success?
           extract_version(stdout.strip)
