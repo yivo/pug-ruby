@@ -3,6 +3,7 @@
 
 Bundler.require
 require "stringio"
+require "regexp-match-polyfill"
 
 def each_jade_version
   ([:system] + Jade.versions).each { |v| yield(v) }
