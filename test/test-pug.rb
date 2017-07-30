@@ -7,7 +7,7 @@ class PugTest < Test::Unit::TestCase
   each_pug_version do |version|
     define_method "test_compiler_switching_#{version}" do
       Pug.use version
-      assert_equal(version == :system ? "2.0.0-beta6" : version, Pug.compiler.version)
+      assert_equal(version == :system ? Pug.versions.last : version, Pug.compiler.version)
     end
 
     define_method "test_compilation_#{version}" do
