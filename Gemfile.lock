@@ -2,12 +2,18 @@ PATH
   remote: .
   specs:
     pug-ruby (1.0.2)
+      execjs (~> 2.0)
+      memoist (~> 0.15)
+      regexp-match-polyfill (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    execjs (2.7.0)
+    memoist (0.16.0)
     power_assert (1.0.2)
     rake (10.5.0)
+    regexp-match-polyfill (1.0.1)
     test-unit (3.2.5)
       power_assert
 

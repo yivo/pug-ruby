@@ -5,3 +5,5 @@ pkg/
 tmp/
 /.idea/
 /node_modules/
+/.yardoc/
+/doc/

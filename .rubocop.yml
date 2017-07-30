@@ -1,0 +1,65 @@
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Enabled: false
+  Max: 110
+
+Style/FileName:
+  Regex: !ruby/regexp /\A[-a-z0-9]+\z/
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Lint/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Layout/ExtraSpacing:
+  Enabled:                 false
+  AllowForAlignment:       true
+  ForceEqualSignAlignment: true
+
+Style/PercentLiteralDelimiters:
+ PreferredDelimiters:
+   default: '[]'
+   '%i':    '[]'
+   '%':     '{}'
+
+Layout/AlignParameters:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes

@@ -1,0 +1,4 @@
+--protected
+--private
+-
+lib/**/*.rb

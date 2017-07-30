@@ -13,9 +13,9 @@ namespace "javascripts" do
     require "open3"
 
     def run(*args)
-      puts *args
+      puts(*args)
       stdout, stderr, exit_status = Open3.capture3(*args)
-      fail stderr.strip.empty? ? stdout : stderr  unless exit_status.success?
+      fail stderr.strip.empty? ? stdout : stderr unless exit_status.success?
       stdout
     end
 
