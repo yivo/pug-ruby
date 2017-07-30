@@ -50,7 +50,9 @@ module JadePug
     #
     # @return [Hash]
     def to_hash
-      instance_variables.map { |var| [var[1..-1].to_sym, instance_variable_get(var)] }.to_h
+      instance_variables.each_with_object({}) do |var, h|
+        h[var[1..-1].to_sym] = instance_variable_get(var)
+      end
     end
   end
 end
