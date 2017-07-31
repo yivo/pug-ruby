@@ -41,6 +41,10 @@ namespace "javascripts" do
       run "[ -f #{output_file} ] || node support/browserify-#{engine}-runtime.js #{engine_runtime_dir} #{engine_version} #{output_file}"
     end
 
+    def copy_license_file(engine, engine_dir, engine_version, output_file)
+      run "[ ! -f #{output_file} -a -f #{engine_dir}/LICENSE ] && cp #{engine_dir}/LICENSE #{output_file} || true"
+    end
+
     tags  = load_all("https://api.github.com/repos/pugjs/pug/releases").map { |x| x.fetch("tag_name") }
     tags += load_all("https://api.github.com/repos/pugjs/pug/tags").map { |x| x.fetch("name") }
     tags.uniq.each do |tag|
@@ -50,6 +54,7 @@ namespace "javascripts" do
         install_node_modules    "tmp/jade-#{version}"
         build_template_compiler :jade, "tmp/jade-#{version}", version, "vendor/jade-#{version}.min.js"
         build_template_runtime  :jade, "tmp/jade-#{version}", version, "vendor/jade-runtime-#{version}.js"
+        copy_license_file       :jade, "tmp/jade-#{version}", version, "vendor/jade-runtime-#{version}-license"
 
       elsif tag.match?(/\A(?:pug@|2)/)
         version = tag.gsub(/\Apug@/, "")
@@ -57,6 +62,8 @@ namespace "javascripts" do
         install_node_modules    "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}/packages/pug"
         build_template_compiler :pug, "tmp/pug-#{version}", version, "vendor/pug-#{version}.min.js"
+        copy_license_file       :pug, "tmp/pug-#{version}", version, "vendor/pug-#{version}-license"
+        copy_license_file       :pug, "tmp/pug-#{version}/packages/pug", version, "vendor/pug-#{version}-license"
       end
     end
 
@@ -66,6 +73,7 @@ namespace "javascripts" do
         version = tag
         clone_repository        "https://github.com/pugjs/pug-runtime.git", tag, "tmp/pug-runtime-#{version}"
         build_template_runtime  :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}.js"
+        copy_license_file       :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}-license"
       end
     end
   end
