@@ -42,7 +42,7 @@ module JadePug
     #
     # @return [String]
     def path_to_compiler_source
-      File.expand_path("../../../vendor/assets/javascripts/#{engine.name.downcase}-#{version}.min.js", __FILE__)
+      File.expand_path("../../../vendor/#{engine.name.downcase}-#{version}.min.js", __FILE__)
     end
 
     #

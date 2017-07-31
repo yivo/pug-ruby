@@ -48,15 +48,15 @@ namespace "javascripts" do
         version = tag
         clone_repository        "https://github.com/pugjs/pug.git", tag, "tmp/jade-#{version}"
         install_node_modules    "tmp/jade-#{version}"
-        build_template_compiler :jade, "tmp/jade-#{version}", version, "vendor/assets/javascripts/jade-#{version}.min.js"
-        build_template_runtime  :jade, "tmp/jade-#{version}", version, "vendor/assets/javascripts/jade-runtime-#{version}.js"
+        build_template_compiler :jade, "tmp/jade-#{version}", version, "vendor/jade-#{version}.min.js"
+        build_template_runtime  :jade, "tmp/jade-#{version}", version, "vendor/jade-runtime-#{version}.js"
 
       elsif tag.match?(/\A(?:pug@|2)/)
         version = tag.gsub(/\Apug@/, "")
         clone_repository        "https://github.com/pugjs/pug.git", tag, "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}/packages/pug"
-        build_template_compiler :pug, "tmp/pug-#{version}", version, "vendor/assets/javascripts/pug-#{version}.min.js"
+        build_template_compiler :pug, "tmp/pug-#{version}", version, "vendor/pug-#{version}.min.js"
       end
     end
 
@@ -65,7 +65,7 @@ namespace "javascripts" do
       if tag.match?(/\A2/)
         version = tag
         clone_repository        "https://github.com/pugjs/pug-runtime.git", tag, "tmp/pug-runtime-#{version}"
-        build_template_runtime  :pug, "tmp/pug-runtime-#{version}", version, "vendor/assets/javascripts/pug-runtime-#{version}.js"
+        build_template_runtime  :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}.js"
       end
     end
   end
