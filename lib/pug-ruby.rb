@@ -1,8 +1,6 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
-require "jade-pug/base"
-
 #
 # This module contains common thing related Jade and Pug.
 #
@@ -15,6 +13,8 @@ module JadePug
   autoload :CompilerError,    "jade-pug/errors/compiler-error"
   autoload :ExecutableError,  "jade-pug/errors/executable-error"
 end
+
+require "jade-pug/base"
 
 #
 # This module contains all stuff related to Jade template engine.

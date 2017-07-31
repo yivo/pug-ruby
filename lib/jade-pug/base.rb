@@ -40,19 +40,19 @@ module JadePug
   # Pass block to temporarily switch the version. Without block the version is switched permanently.
   #
   # @param wanted_version [String, :system]
-  # @return [void]
+  # @return
   def use(wanted_version)
     previous_version = @version
     @version         = wanted_version
     did_switch_version(previous_version, wanted_version)
 
-    if block_given?
-      begin
-        yield
-      ensure
-        @version = previous_version
-        did_switch_version(wanted_version, previous_version)
-      end
+    return @version unless block_given?
+
+    begin
+      yield
+    ensure
+      @version = previous_version
+      did_switch_version(wanted_version, previous_version)
     end
   end
 

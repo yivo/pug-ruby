@@ -10,6 +10,7 @@ Style/FileName:
 
 Layout/CaseIndentation:
   EnforcedStyle: end
+  IndentOneStep: true
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
@@ -63,3 +64,18 @@ Lint/UnusedMethodArgument:
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/CaseEquality:
+  Enabled: false

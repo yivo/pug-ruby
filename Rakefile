@@ -3,9 +3,7 @@
 
 require "rake/testtask"
 
-Rake::TestTask.new do |t|
-  t.test_files = FileList["test/**/test*.rb"]
-end
+Rake::TestTask.new { |t| t.libs << "test" }
 
 namespace "javascripts" do
   task "build" do
@@ -15,7 +13,7 @@ namespace "javascripts" do
     def run(*args)
       puts(*args)
       stdout, stderr, exit_status = Open3.capture3(*args)
-      fail stderr.strip.empty? ? stdout : stderr unless exit_status.success?
+      raise stderr.strip.empty? ? stdout : stderr unless exit_status.success?
       stdout
     end
 
@@ -69,12 +67,11 @@ namespace "javascripts" do
 
     tags = load_all("https://api.github.com/repos/pugjs/pug-runtime/tags").map { |x| x.fetch("name") }
     tags.uniq.each do |tag|
-      if tag.match?(/\A2/)
-        version = tag
-        clone_repository        "https://github.com/pugjs/pug-runtime.git", tag, "tmp/pug-runtime-#{version}"
-        build_template_runtime  :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}.js"
-        copy_license_file       :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}-license"
-      end
+      next unless tag.match?(/\A2/)
+      version = tag
+      clone_repository        "https://github.com/pugjs/pug-runtime.git", tag, "tmp/pug-runtime-#{version}"
+      build_template_runtime  :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}.js"
+      copy_license_file       :pug, "tmp/pug-runtime-#{version}", version, "vendor/pug-runtime-#{version}-license"
     end
   end
 end

@@ -1,6 +1,8 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
+require "method-not-implemented"
+
 module JadePug
   #
   # Abstraction layer for engine compiler.
@@ -42,7 +44,7 @@ module JadePug
     # @param options [Hash]
     # @return [String]
     def compile(source, options = {})
-
+      method_not_implemented
     end
 
   protected
