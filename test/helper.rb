@@ -1,7 +1,7 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
-Bundler.require
+Bundler.require :default, :development
 require "stringio"
 require "regexp-match-polyfill"
 
