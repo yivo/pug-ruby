@@ -1,9 +1,11 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
+require File.expand_path("../lib/pug-ruby/version", __FILE__)
+
 Gem::Specification.new do |s|
   s.name            = "pug-ruby"
-  s.version         = "2.0.0"
+  s.version         = PUG_RUBY_GEM_VERSION
   s.author          = "Yaroslav Konoplov"
   s.email           = "eahome00@gmail.com"
   s.summary         = "Ruby wrapper for the Jade / Pug template engine."
