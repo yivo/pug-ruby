@@ -40,7 +40,8 @@ module JadePug
   # Pass block to temporarily switch the version. Without block the version is switched permanently.
   #
   # @param wanted_version [String, :system]
-  # @return
+  # @return [String, :system] Returns the version if no block has been given.
+  # @return Passes through the returned value from the block if it has been given.
   def use(wanted_version)
     previous_version = @version
     @version         = wanted_version
@@ -66,9 +67,9 @@ module JadePug
   def did_switch_version(version_from, version_to)
     if version_from != version_to
       if Symbol === version_to
-        puts "Using #{version_to} #{name}."
+        echo "Using #{version_to} #{name}."
       else
-        puts "Using #{name} #{version_to}. NOTE: Advanced features like includes, extends and blocks will not work."
+        echo "Using #{name} #{version_to}. NOTE: Advanced features like includes, extends and blocks will not work."
       end
     end
     nil
