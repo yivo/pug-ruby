@@ -116,4 +116,32 @@ module JadePug
     self::Config.new
   end
   memoize :config
+
+  #
+  # Prints messages.
+  # By default messages are sent to the STDOUT by using {Kernel#puts}.
+  #
+  # @param *messages [Array<Object>]
+  # @return [nil]
+  def echo(*messages)
+    puts(*messages) unless silence?
+  end
+
+  #
+  # Turns the effect of {#echo} on or off.
+  #
+  # @param silence [true, false]
+  # @return [true, false]
+  def silence=(silence)
+    @silence = !!silence
+  end
+
+  #
+  # Returns true if {#echo} should print messages.
+  # Elsewhere returns false.
+  #
+  # @return [true, false]
+  def silence?
+    !!@silence
+  end
 end
