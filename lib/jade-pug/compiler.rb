@@ -47,6 +47,24 @@ module JadePug
       method_not_implemented
     end
 
+    #
+    # Returns true if this compiler is a system compiler.
+    # Otherwise returns false.
+    #
+    # @return [true, false]
+    def system?
+      SystemCompiler === self
+    end
+
+    #
+    # Returns true if this compiler is a shipped compiler.
+    # Otherwise returns false.
+    #
+    # @return [true, false]
+    def shipped?
+      ShippedCompiler === self
+    end
+
   protected
 
     #

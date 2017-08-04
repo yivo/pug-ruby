@@ -13,20 +13,20 @@ module JadePug
   # @param options [Hash]
   # @return [String]
   def compile(source, options = {})
-    compiler(@version).compile(source, options)
+    compiler.compile(source, options)
   end
 
   #
   # Returns engine compiler for given version.
   # Compilers are cached.
   #
-  # @param version [String, :system]
+  # @param wanted_version [String, :system]
   # @return [Jade::SystemCompiler, Jade::ShippedCompiler, Pug::SystemCompiler, Pug::ShippedCompiler]
-  def compiler(version = @version)
-    (@compilers ||= {})["#{name}-#{version}"] ||= begin
-      case version
+  def compiler(wanted_version = version)
+    (@compilers ||= {})["#{name}-#{wanted_version}"] ||= begin
+      case wanted_version
         when :system then self::SystemCompiler.new
-        else              self::ShippedCompiler.new(version)
+        else              self::ShippedCompiler.new(wanted_version)
       end
     end
   end
@@ -43,7 +43,7 @@ module JadePug
   # @return [String, :system] Returns the version if no block has been given.
   # @return Passes through the returned value from the block if it has been given.
   def use(wanted_version)
-    previous_version = @version
+    previous_version = version
     @version         = wanted_version
     did_switch_version(previous_version, wanted_version)
 
@@ -138,10 +138,30 @@ module JadePug
 
   #
   # Returns true if {#echo} should print messages.
-  # Elsewhere returns false.
+  # Otherwise returns false.
   #
   # @return [true, false]
   def silence?
     !!@silence
   end
+
+  #
+  # Returns version of currently used engine compiler.
+  # If no version has been set returns :system.
+  #
+  # Only for internal usage.
+  #
+  # To get the actual version of engine compiler refer to {Compiler#version}.
+  #
+  #   Jade.compiler.version => "1.11.0"
+  #
+  # @return [String, :system]
+  def version
+    if instance_variable_defined?(:@version)
+      @version
+    else
+      :system
+    end
+  end
+  private :version
 end

@@ -13,6 +13,7 @@ module JadePug
     def initialize(engine)
       super(engine, nil)
       check_executable!
+      engine.echo "Resolved system #{engine.name} to #{version}."
     end
 
     #

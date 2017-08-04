@@ -49,6 +49,3 @@ module Pug
   autoload :CompilerError,         "pug-ruby/errors/compiler-error"
   autoload :ExecutableError,       "pug-ruby/errors/executable-error"
 end
-
-Jade.use :system
-Pug.use  :system
