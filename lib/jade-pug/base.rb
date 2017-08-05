@@ -63,7 +63,7 @@ module JadePug
   #
   # @param version_from [String, :system]
   # @param version_to [String, :system]
-  # @return [void]
+  # @return [nil]
   def did_switch_version(version_from, version_to)
     if version_from != version_to
       if Symbol === version_to

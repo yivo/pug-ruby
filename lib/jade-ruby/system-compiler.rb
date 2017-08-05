@@ -26,7 +26,7 @@ module Jade
         cmd = [executable]
 
         # Command line arguments take precedence over json options
-        # https://github.com/jadejs/jade/blob/master/bin/jade.js
+        # https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js
         cmd.push("--obj",             JSON.generate(opts))
 
         cmd.push("--out",             opts[:out])             if opts[:out]

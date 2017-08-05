@@ -39,7 +39,7 @@ module JadePug
     #
     # @raise {Jade::ExecutableError, Pug::ExecutableError}
     #   If no executable found in the system.
-    # @return [void]
+    # @return [nil]
     def check_executable!
       return if @executable_checked
 
