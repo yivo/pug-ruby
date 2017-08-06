@@ -3,6 +3,7 @@
 
 require "rake/testtask"
 
+ENV["TESTOPTS"] = "--verbose"
 Rake::TestTask.new { |t| t.libs << "test" }
 
 namespace "javascripts" do
