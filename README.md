@@ -3,9 +3,9 @@
 [![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
 [![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
 
-<img width="49.138705862%" alt="jade" align="left" src="https://user-images.githubusercontent.com/7421323/29007509-4fb4e004-7b0d-11e7-9b21-6bdd98a24344.png">
+<img width="49.710808069%" alt="jade" align="left" src="https://user-images.githubusercontent.com/7421323/29007509-4fb4e004-7b0d-11e7-9b21-6bdd98a24344.png">
 
-<img width="47.482344991%" alt="pug" src="https://user-images.githubusercontent.com/7421323/29007510-4fcdb638-7b0d-11e7-80c7-e3c49434ca8a.png">
+<img width="48.035162854%" alt="pug" src="https://user-images.githubusercontent.com/7421323/29007510-4fcdb638-7b0d-11e7-80c7-e3c49434ca8a.png">
 
 ## About
 
