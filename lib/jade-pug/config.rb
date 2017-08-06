@@ -54,5 +54,7 @@ module JadePug
         h[var[1..-1].to_sym] = instance_variable_get(var)
       end
     end
+
+    alias to_h to_hash
   end
 end
