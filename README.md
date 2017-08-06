@@ -170,8 +170,8 @@ Pug.use :system
 
 Access Pug and Jade configurations:
 ```ruby
-Jade.config.compile_debug = false
-Pug.config.compile_debug  = false
+Jade.config.pretty = true
+Pug.config.pretty  = true
 ```
 
 Refer to official website for configuration options: 
