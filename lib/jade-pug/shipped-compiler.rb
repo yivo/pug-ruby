@@ -69,7 +69,11 @@ module JadePug
       end
     end
 
-    def require_snippet
+    #
+    # Returns the JavaScript code used to access engine NPM package.
+    #
+    # @return [String]
+    def npm_package_require_snippet
       engine.name.downcase
     end
   end

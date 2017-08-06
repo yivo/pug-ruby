@@ -97,15 +97,28 @@ module JadePug
       options.delete_if { |k, v| v.nil? }
     end
 
-    def compilation_snippet(args)
-      method    = args.fetch(:method)
-      arguments = args.fetch(:arguments)
-      locals    = args.fetch(:locals)
-      options   = args.fetch(:options)
-
+    #
+    # Generates the JavaScript code that is the bridge
+    # from the gem to the template engine compiler.
+    #
+    # The code responds for:
+    # - invoking compiler
+    # - rendering template function with given locals
+    # - returning the result
+    #
+    # @param method [String]
+    #   The name of engine method to call.
+    # @param arguments [Array<Object>]
+    #   The array of arguments to be passed to the method.
+    # @param locals [Hash]
+    #   The hash of template local variables to be used to render template.
+    # @param options [Hash]
+    #   The hash of options passed to {#compile}.
+    # @return [String]
+    def compilation_snippet(method:, arguments:, locals:, options:)
       <<-JAVASCRIPT
         (function() {
-          var engine   = #{require_snippet};
+          var engine   = #{npm_package_require_snippet};
           var template = engine[#{ JSON.dump(method) }].apply(engine, #{ JSON.dump(arguments) });
             
           if (typeof template === 'function') {
@@ -121,10 +134,13 @@ module JadePug
       JAVASCRIPT
     end
 
-    def require_snippet
-      <<-JAVASCRIPT
-        typeof require === 'function' ? require(#{ JSON.dump(engine.name.downcase) }) : #{ engine.name.downcase }
-      JAVASCRIPT
+    #
+    # Returns the JavaScript code used to access engine NPM module.
+    #
+    # @abstract Derived compilers must implement it.
+    # @return [String]
+    def npm_package_require_snippet
+      method_not_implemented
     end
 
     #
