@@ -7,7 +7,7 @@ module Pug
   #
   # The documentation for Pug configuration can be found here:
   # - {https://pugjs.org/api/reference.html}
-  # - {https://github.com/pugjs/pug-cli}
+  # - {https://github.com/pugjs/pug-cli/blob/master/index.js}
   #
   class Config < JadePug::Config
     def initialize

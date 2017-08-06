@@ -7,7 +7,7 @@ module Jade
   #
   # The documentation for Jade compiler can be found here:
   # - {http://web.archive.org/web/20160404025722/http://jade-lang.com/api/}
-  # - {http://web.archive.org/web/20160618141847/http://jade-lang.com/command-line/}
+  # - {https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js}
   #
   class Config < JadePug::Config
     def initialize
