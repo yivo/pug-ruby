@@ -1,10 +1,12 @@
-## Ruby wrapper for the Pug/Jade template engine
+## Ruby wrapper for the Jade and Pug
 
 [![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
 [![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
 
 ## About
-This gem is a wrapper for Jade/Pug command line interface. 
+
+This gem is a wrapper for Jade / Pug template engines.
+ 
 You can compile both Jade templates ([version 1.x](https://github.com/pugjs/pug/tree/v1.x.x)) and Pug ([version 2.x](https://github.com/pugjs/pug)).
 
 ```ruby
@@ -14,10 +16,12 @@ Pug.compile(source, options)
 
 ## Installing gem
 
+**RubyGems users**
+
 1. Run `gem install pug-ruby --version "~> 2.0"`. 
 2. Add `require "pug-ruby"` to your code.
 
-**If you are using bundler.**
+**Bundler users**
 
 1. Add to your Gemfile:
 ```ruby
@@ -25,23 +29,23 @@ gem "pug-ruby", "~> 1.0"
 ```
 2. Run `bundle install`.
 
-## Installing Jade CLI
+## Installing Jade
 
-Install Jade CLI globally via npm:
+Install Jade globally via npm:
 ```bash
 npm install --global jade
 ```
 You may require `sudo` depending on your system.
 
-## Installing Pug CLI
+## Installing Pug
 
-Install Pug CLI globally via npm:
+Install Pug globally via npm:
 ```bash
-npm install --global pug-cli
+npm install --global pug
 ```
 You may require `sudo` depending on your system.
 
-## Switching version
+## Switching Jade / Pug version
 
 The gem is shipped with different prebuilt versions of Jade and Pug.
 That prebuilt versions are Web version, e.g. they are limited to browser JavaScript.
@@ -163,6 +167,7 @@ Pug.use :system
 * 2.0.2
 
 ## Configuring Jade and Pug
+
 Access Pug and Jade configurations:
 ```ruby
 Jade.config.compile_debug = false
