@@ -11,7 +11,6 @@ module JadePug
   autoload :SystemCompiler,   "jade-pug/system-compiler"
   autoload :CompilationError, "jade-pug/errors/compilation-error"
   autoload :CompilerError,    "jade-pug/errors/compiler-error"
-  autoload :ExecutableError,  "jade-pug/errors/executable-error"
 end
 
 require "jade-pug/base"
@@ -30,7 +29,6 @@ module Jade
   autoload :CompilationEssentials, "jade-ruby/compilation-essentials"
   autoload :CompilationError,      "jade-ruby/errors/compilation-error"
   autoload :CompilerError,         "jade-ruby/errors/compiler-error"
-  autoload :ExecutableError,       "jade-ruby/errors/executable-error"
 end
 
 #
@@ -47,5 +45,4 @@ module Pug
   autoload :CompilationEssentials, "pug-ruby/compilation-essentials"
   autoload :CompilationError,      "pug-ruby/errors/compilation-error"
   autoload :CompilerError,         "pug-ruby/errors/compiler-error"
-  autoload :ExecutableError,       "pug-ruby/errors/executable-error"
 end
