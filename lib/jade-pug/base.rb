@@ -80,10 +80,10 @@ module JadePug
   #
   # @return [Array<String>]
   def versions
-    Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
+    sort_versions(Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
       match = File.basename(path).match(/\A#{name.downcase}-(?!runtime-)(?<v>.+)\.min\.js\z/)
       match[:v] if match
-    end.compact.sort
+    end.compact)
   end
   memoize :versions
 
@@ -92,10 +92,10 @@ module JadePug
   #
   # @return [Array<String>]
   def runtime_versions
-    Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
+    sort_versions(Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
       match = File.basename(path).match(/\A#{name.downcase}-runtime-(?<v>.+)\.js\z/)
       match[:v] if match
-    end.compact.sort
+    end.compact)
   end
   memoize :runtime_versions
 
@@ -164,4 +164,15 @@ module JadePug
     end
   end
   private :version
+
+  #
+  # Sorts versions in ascending order.
+  # @see {https://stackoverflow.com/a/33290373/2369428}
+  #
+  # @param versions [Array<String>]
+  # @return [Array<String>]
+  def sort_versions(versions)
+    versions.sort_by { |v| Gem::Version.new(v) }
+  end
+  private :sort_versions
 end
