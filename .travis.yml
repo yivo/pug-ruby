@@ -16,8 +16,7 @@ before_install:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
-  - npm install --global jade
-  - npm install --global pug-cli
+  - npm install --global jade pug pug-cli
   - gem install bundler
 
 install:
