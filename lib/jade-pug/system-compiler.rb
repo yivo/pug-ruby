@@ -6,7 +6,7 @@ require "json"
 
 module JadePug
   #
-  # Abstraction layer for engine command line utility.
+  # Abstraction layer for system engine compiler.
   #
   class SystemCompiler < Compiler
     #

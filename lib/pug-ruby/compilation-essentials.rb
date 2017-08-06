@@ -16,10 +16,10 @@ module Pug
     def process_result(source, result, options)
       if options[:client]
         if options[:inline_runtime_functions]
-          "(function() { #{result}; return #{options[:name]}; }).call(this);"
+          "(function() { #{super}; return #{options[:name]}; }).call(this);"
         else
           pug = "typeof pugRuntime === 'object' && pugRuntime !== null ? pugRuntime : pug"
-          "(function(pug) { #{result}; return #{options[:name]}; }).call(this, #{pug});"
+          "(function(pug) { #{super}; return #{options[:name]}; }).call(this, #{pug});"
         end
       else
         super

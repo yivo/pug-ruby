@@ -3,7 +3,7 @@
 
 module Pug
   #
-  # Abstraction layer for Pug command line utility.
+  # Abstraction layer for system Pug compiler.
   #
   class SystemCompiler < JadePug::SystemCompiler
     include CompilationEssentials

@@ -130,15 +130,16 @@ module JadePug
     #
     # Responds for post-processing compilation result.
     #
-    # By default returns the result without any processing.
-    # Derived compilers may override it for it's own special behaviors.
+    # By default removes leading and trailing whitespace
+    # by calling {String#strip} and returns the result.
+    # Derived compilers may override it for it's own special behavior.
     #
     # @param source [String] The source code of template.
     # @param result [String] The compiled code of template.
     # @param options [Hash] The compilation options.
     # @return [String]
     def process_result(source, result, options)
-      result
+      result.strip
     end
   end
 end

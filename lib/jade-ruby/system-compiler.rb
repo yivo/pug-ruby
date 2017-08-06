@@ -3,7 +3,7 @@
 
 module Jade
   #
-  # Abstraction layer for Jade command line utility.
+  # Abstraction layer for system Jade compiler.
   #
   class SystemCompiler < JadePug::SystemCompiler
     include CompilationEssentials
