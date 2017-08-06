@@ -3,13 +3,11 @@
 [![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
 [![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
 
-<img width="426" height="170.5" alt="jade" align="left" src="https://user-images.githubusercontent.com/7421323/29007457-5cb6c692-7b0c-11e7-9e1c-3bb26d7e32af.png">
+<img width="434" alt="jade" align="left" src="https://user-images.githubusercontent.com/7421323/29007509-4fb4e004-7b0d-11e7-9b21-6bdd98a24344.png">
 
-<img width="426" height="170.5" alt="pug" src="https://user-images.githubusercontent.com/7421323/29007458-5cbd05e8-7b0c-11e7-9ad4-a6cc57e7480b.png">
+<img width="418" alt="pug" src="https://user-images.githubusercontent.com/7421323/29007510-4fcdb638-7b0d-11e7-80c7-e3c49434ca8a.png">
 
 ## About
-
-
 
 This gem is a wrapper for Jade / Pug template engines.
  
