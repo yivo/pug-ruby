@@ -11,15 +11,5 @@ module Pug
     def initialize
       super Pug
     end
-
-  protected
-
-    def cli_npm_package_path
-      File.expand_path("../", @path_to_cli_utility)
-    end
-
-    def nri_npm_package_path
-      File.expand_path("../../pug", @path_to_cli_utility)
-    end
   end
 end

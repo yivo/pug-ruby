@@ -11,15 +11,5 @@ module Jade
     def initialize
       super Jade
     end
-
-  protected
-
-    def cli_npm_package_path
-      File.expand_path("../../", @path_to_cli_utility)
-    end
-
-    def nri_npm_package_path
-      File.expand_path("../../", @path_to_cli_utility)
-    end
   end
 end

@@ -15,8 +15,7 @@ module JadePug
       super(engine, nil)
 
       check_node_runtime!
-      check_cli_npm_package!
-      check_nri_npm_package!
+      check_npm_package!
 
       engine.echo "Resolved system #{engine.name} to #{version}."
     end
@@ -46,79 +45,50 @@ module JadePug
     #
     # @return [String, nil]
     def version
-      load_versions
-      @version
-    end
-
-    def cli_version
-      load_versions
-      @cli_version
-    end
-
-  protected
-
-    def load_versions
-      check_node_runtime!
-      check_cli_npm_package!
-      check_nri_npm_package!
-
-      snippet = <<-JAVASCRIPT
-        console.log(require(#{ JSON.dump(nri_npm_package_path + "/package.json") }).version);
-        console.log(require(#{ JSON.dump(cli_npm_package_path + "/package.json") }).version);
-      JAVASCRIPT
-
-      stdout, stderr, exit_status = Open3.capture3("node", "--eval", snippet)
+      stdout, exit_status = Open3.capture2 "node", "--eval", \
+        "console.log(require(#{ JSON.dump(File.join(npm_package_path, "package.json")) }).version)"
 
       if exit_status.success?
-        lines        = stdout.split(/[\n\r]+/).map(&:strip).reject(&:empty?)
-        @version     = lines[0]
-        @cli_version = lines[1]
+        stdout.strip
       else
         raise engine::ExecutableError, \
           %{Failed to retrieve #{engine.name} version. Perhaps, the problem with Node.js runtime.}
       end
     end
-    memoize :load_versions
+    memoize :version
 
-    def cli_executable_name
+  protected
+
+    def npm_package_name
       engine.name.downcase
     end
 
-    #
-    # Returns name for the engine in NPM registry.
-    # By default it tries to guess the name.
-    # Derived compilers may override it for custom behavior.
-    #
-    # @return [String]
-    def cli_npm_package_name
-      engine.name.downcase
+    def npm_package_path
+      File.join(npm_packages_root, engine.name.downcase)
     end
 
-    def cli_npm_package_path
-      method_not_implemented
-    end
-
-    def nri_npm_package_name
-      engine.name.downcase
-    end
-
-    def nri_npm_package_path
-      method_not_implemented
-    end
-
-    def nri_npm_require_snippet
-      <<-JAVASCRIPT
-        require(#{ JSON.dump(nri_npm_package_path) })
-      JAVASCRIPT
+    def npm_package_require_snippet
+      "require(#{ JSON.dump(npm_package_path) })"
     end
 
     def require_snippet
-      nri_npm_require_snippet
+      npm_package_require_snippet
     end
 
-    def check_node_runtime!
-      stdout, stderr, exit_status = Open3.capture3("node", "--version")
+    def npm_packages_root
+      stdout, exit_status = Open3.capture2("npm", "root", "--global")
+      if exit_status.success?
+        stdout.strip
+      else
+        # TODO Use different error?
+        raise engine::ExecutableError, \
+          "Unable to get NPM packages root. Perhaps, the problem with Node.js runtime."
+      end
+    end
+    memoize :npm_packages_root
 
+    def check_node_runtime!
+      stdout, exit_status = Open3.capture2("node", "--version")
       if exit_status.success?
         engine.echo "Node.js #{stdout.strip}."
       else
@@ -130,30 +100,15 @@ module JadePug
     end
     memoize :check_node_runtime!
 
-    def check_cli_npm_package!
-      stdout, stderr, exit_status = Open3.capture3("which", cli_executable_name)
-
-      if File.exists?(stdout.strip)
-        @path_to_cli_utility = File.realpath(stdout.strip)
-      else
-        # TODO Use different error?
-        raise engine::ExecutableError, \
-          %{No #{engine.name} CLI utility found in your system. Did you forget to "npm install --global #{cli_npm_package_name}"?}
-      end
-      nil
-    end
-    memoize :check_cli_npm_package!
-
-    def check_nri_npm_package!
-      stdout, stderr, exit_status = Open3.capture3("node", "--eval", nri_npm_require_snippet)
-
+    def check_npm_package!
+      exit_status = Open3.capture2("node", "--eval", "require(#{ JSON.dump(npm_package_path) })")[1]
       unless exit_status.success?
         # TODO Use different error?
         raise engine::ExecutableError, \
-          %{No #{engine.name} NPM package found in your system. Did you forget to install?}
+          %{No #{engine.name} NPM package found in your system. Did you forget to "npm install --global #{npm_package_name}"?}
       end
       nil
     end
-    memoize :check_nri_npm_package!
+    memoize :check_npm_package!
   end
 end
