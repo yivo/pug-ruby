@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require "open3"
+require "json"
 
 module JadePug
   #
@@ -12,7 +13,11 @@ module JadePug
     # @param engine [Jade, Pug]
     def initialize(engine)
       super(engine, nil)
-      check_executable!
+
+      check_node_runtime!
+      check_cli_npm_package!
+      check_nri_npm_package!
+
       engine.echo "Resolved system #{engine.name} to #{version}."
     end
 
@@ -25,33 +30,15 @@ module JadePug
     def compile(source, options = {})
       source  = prepare_source(source)
       options = prepare_options(options)
-      command = yield(source, options)
-      stdout, stderr, exit_status = Open3.capture3(*command, stdin_data: source)
+      command = ["node", "--eval"]
+      command.push compilation_snippet \
+        method:    "compile#{"Client" if options[:client]}",
+        arguments: [source, options],
+        locals:    options.fetch(:locals, {}),
+        options:   options
+      stdout, stderr, exit_status = Open3.capture3(*command)
       raise engine::CompilationError, stderr unless exit_status.success?
       process_result(source, stdout, options)
-    end
-
-    #
-    # Checks if executable exists in $PATH.
-    #
-    # The method of check is described in this Stack Overflow answer:
-    # {https://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script}
-    #
-    # @raise {Jade::ExecutableError, Pug::ExecutableError}
-    #   If no executable found in the system.
-    # @return [nil]
-    def check_executable!
-      return if @executable_checked
-
-      stdout, stderr, exit_status = Open3.capture3("which", executable)
-
-      if exit_status.success?
-        @executable_checked = true
-      else
-        raise engine::ExecutableError, \
-          %{No #{engine.name} executable found in your system. Did you forget to "npm install --global #{package}"?}
-      end
-      nil
     end
 
     #
@@ -59,39 +46,41 @@ module JadePug
     #
     # @return [String, nil]
     def version
-      @version ||= begin
-        check_executable!
+      load_versions
+      @version
+    end
 
-        stdout, stderr, exit_status = Open3.capture3(executable, "--version")
-
-        if exit_status.success?
-          extract_version(stdout.strip)
-        else
-          raise engine::ExecutableError, \
-            %{Failed to retrieve #{engine.name} version. Perhaps, the problem with Node.js runtime.}
-        end
-      end
+    def cli_version
+      load_versions
+      @cli_version
     end
 
   protected
 
-    #
-    # Responds for the extraction of engine version
-    # from output of the command "pug --version".
-    #
-    # @param output [String]
-    # @return [String]
-    def extract_version(output)
-      output
-    end
+    def load_versions
+      check_node_runtime!
+      check_cli_npm_package!
+      check_nri_npm_package!
 
-    #
-    # Returns executable name for the engine.
-    # By default it tries to guess the name.
-    # Derived compilers may override it for custom behavior.
-    #
-    # @return [String]
-    def executable
+      snippet = <<-JAVASCRIPT
+        console.log(require(#{ JSON.dump(nri_npm_package_path + "/package.json") }).version);
+        console.log(require(#{ JSON.dump(cli_npm_package_path + "/package.json") }).version);
+      JAVASCRIPT
+
+      stdout, stderr, exit_status = Open3.capture3("node", "--eval", snippet)
+
+      if exit_status.success?
+        lines        = stdout.split(/[\n\r]+/).map(&:strip).reject(&:empty?)
+        @version     = lines[0]
+        @cli_version = lines[1]
+      else
+        raise engine::ExecutableError, \
+          %{Failed to retrieve #{engine.name} version. Perhaps, the problem with Node.js runtime.}
+      end
+    end
+    memoize :load_versions
+
+    def cli_executable_name
       engine.name.downcase
     end
 
@@ -101,8 +90,70 @@ module JadePug
     # Derived compilers may override it for custom behavior.
     #
     # @return [String]
-    def package
+    def cli_npm_package_name
       engine.name.downcase
     end
+
+    def cli_npm_package_path
+      method_not_implemented
+    end
+
+    def nri_npm_package_name
+      engine.name.downcase
+    end
+
+    def nri_npm_package_path
+      method_not_implemented
+    end
+
+    def nri_npm_require_snippet
+      <<-JAVASCRIPT
+        require(#{ JSON.dump(nri_npm_package_path) })
+      JAVASCRIPT
+    end
+
+    def require_snippet
+      nri_npm_require_snippet
+    end
+
+    def check_node_runtime!
+      stdout, stderr, exit_status = Open3.capture3("node", "--version")
+
+      if exit_status.success?
+        engine.echo "Node.js #{stdout.strip}."
+      else
+        # TODO Use different error?
+        raise engine::ExecutableError, \
+          "No Node.js runtime found in your system."
+      end
+      nil
+    end
+    memoize :check_node_runtime!
+
+    def check_cli_npm_package!
+      stdout, stderr, exit_status = Open3.capture3("which", cli_executable_name)
+
+      if File.exists?(stdout.strip)
+        @path_to_cli_utility = File.realpath(stdout.strip)
+      else
+        # TODO Use different error?
+        raise engine::ExecutableError, \
+          %{No #{engine.name} CLI utility found in your system. Did you forget to "npm install --global #{cli_npm_package_name}"?}
+      end
+      nil
+    end
+    memoize :check_cli_npm_package!
+
+    def check_nri_npm_package!
+      stdout, stderr, exit_status = Open3.capture3("node", "--eval", nri_npm_require_snippet)
+
+      unless exit_status.success?
+        # TODO Use different error?
+        raise engine::ExecutableError, \
+          %{No #{engine.name} NPM package found in your system. Did you forget to install?}
+      end
+      nil
+    end
+    memoize :check_nri_npm_package!
   end
 end

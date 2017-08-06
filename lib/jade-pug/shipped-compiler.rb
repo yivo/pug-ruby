@@ -25,11 +25,12 @@ module JadePug
     def compile(source, options = {})
       source  = prepare_source(source)
       options = prepare_options(options)
-      result  = if block_given?
-        yield
-      else
-        @execjs.call("#{engine.name.downcase}.compile#{"Client" if options[:client]}", source, options)
-      end
+      snippet = compilation_snippet \
+        method:    "compile#{"Client" if options[:client]}",
+        arguments: [source, options],
+        locals:    options.fetch(:locals, {}),
+        options:   options
+      result  = @execjs.eval(snippet)
       process_result(source, result, options)
     rescue ExecJS::ProgramError => e
       raise engine::CompilationError, e.message
@@ -64,8 +65,12 @@ module JadePug
     # @return [ExecJS::Runtime]
     def compile_compiler_source(source)
       ExecJS.compile(source).tap do |compiler|
-        raise engine::CompilerError, "Failed to compile compiler" unless compiler
+        raise engine::CompilerError, "Failed to compile #{engine.name} compiler" unless compiler
       end
+    end
+
+    def require_snippet
+      engine.name.downcase
     end
   end
 end

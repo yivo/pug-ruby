@@ -1,13 +1,16 @@
 # encoding: UTF-8
 # frozen_string_literal: true
 
+require "memoist"
 require "method-not-implemented"
+require "json"
 
 module JadePug
   #
   # Abstraction layer for engine compiler.
   #
   class Compiler
+    extend Memoist
 
     #
     # Returns the engine module.
@@ -92,6 +95,36 @@ module JadePug
       options = engine.config.to_hash.merge(options)
       options.keys.each { |k, v| options[k.to_s.gsub(/_([a-z])/) { $1.upcase }.to_sym] = options[k] }
       options.delete_if { |k, v| v.nil? }
+    end
+
+    def compilation_snippet(args)
+      method    = args.fetch(:method)
+      arguments = args.fetch(:arguments)
+      locals    = args.fetch(:locals)
+      options   = args.fetch(:options)
+
+      <<-JAVASCRIPT
+        (function() {
+          var engine   = #{require_snippet};
+          var template = engine[#{ JSON.dump(method) }].apply(engine, #{ JSON.dump(arguments) });
+            
+          if (typeof template === 'function') {
+            template = template(#{ JSON.dump(locals) });
+          }
+        
+          if (typeof console === 'object' && console !== null && typeof console.log === 'function') {
+            console.log(template);
+          }
+
+          return template;
+        })()
+      JAVASCRIPT
+    end
+
+    def require_snippet
+      <<-JAVASCRIPT
+        typeof require === 'function' ? require(#{ JSON.dump(engine.name.downcase) }) : #{ engine.name.downcase }
+      JAVASCRIPT
     end
 
     #
