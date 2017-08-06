@@ -102,7 +102,7 @@ module JadePug
     #
     # Checks if Node.js runtime exists in $PATH and is accessible.
     #
-    # @raise {JadePug::ExecutableError}
+    # @raise {JadePug::CompilerError}
     #   If Node.js runtime doesn't exist in system.
     # @return [nil]
     def check_node_runtime!

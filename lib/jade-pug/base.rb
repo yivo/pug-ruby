@@ -21,7 +21,7 @@ module JadePug
   # Compilers are cached.
   #
   # @param wanted_version [String, :system]
-  # @return [Jade::SystemCompiler, Jade::ShippedCompiler, Pug::SystemCompiler, Pug::ShippedCompiler]
+  # @return [JadePug::Compiler]
   def compiler(wanted_version = version)
     (@compilers ||= {})["#{name}-#{wanted_version}"] ||= begin
       case wanted_version
@@ -111,7 +111,7 @@ module JadePug
   # Returns config object for engine.
   # Executed only once per engine (return value is memoized).
   #
-  # @return [Jade::Config, Pug::Config]
+  # @return [JadePug::Config]
   def config
     self::Config.new
   end
