@@ -106,16 +106,21 @@ module JadePug
     # - rendering template function with given locals
     # - returning the result
     #
-    # @param method [String]
+    # @param :method [String]
     #   The name of engine method to call.
-    # @param arguments [Array<Object>]
+    # @param :arguments [Array<Object>]
     #   The array of arguments to be passed to the method.
-    # @param locals [Hash]
+    # @param :locals [Hash]
     #   The hash of template local variables to be used to render template.
-    # @param options [Hash]
+    # @param :options [Hash]
     #   The hash of options passed to {#compile}.
     # @return [String]
-    def compilation_snippet(method:, arguments:, locals:, options:)
+    def compilation_snippet(args)
+      method    = args.fetch(:method)
+      arguments = args.fetch(:arguments)
+      locals    = args.fetch(:locals)
+      options   = args.fetch(:options)
+
       <<-JAVASCRIPT
         (function() {
           var engine   = #{npm_package_require_snippet};
