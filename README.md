@@ -173,40 +173,40 @@ Pug.use  :system
 
 ## Configuring Jade / Pug
 
-Accessing configuration:
+**Accessing configuration:**
 ```ruby
 Jade.config
 ```
 
-Getting configuration options:
+**Getting configuration options:**
 ```ruby
 Jade.config.pretty  # => false
 Jade.config.pretty? # => false
 ```
 
-Setting configuration options:
+**Setting configuration options:**
 ```ruby
 Jade.config.pretty = true
 ```
 
-Setting custom configuration options:
+**Setting custom configuration options:**
 ```ruby
 Jade.config.custom_option = "value"
 ```
 
-Serializing configuration:
+**Serializing configuration:**
 ```ruby
 Jade.config.to_h
   # => { filename: nil, doctype: nil, pretty: false, self: false, compile_debug: false, globals: [], name: "template" }
 ```
 
-The documentation for configuration options can be found here:
+**The documentation for configuration options can be found here:**
 * [Official Jade website (Web Archive only)](http://web.archive.org/web/*/jade-lang.com/api)
 * [Jade CLI utility reference](https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js)
 * [Official Pug website](https://pugjs.org/api/reference.html)
 * [Pug CLI utility reference](https://github.com/pugjs/pug-cli/blob/master/index.js)
 
-Pass an options to `Jade#compile` or `Pug#compile` as second argument to override global config:
+**Pass an options to `Jade#compile` or `Pug#compile` as second argument to override global config:**
 ```ruby
 Jade.compile "h1 Title\ndiv Content"
   # => "<h1>Title</h1><div>Content</div>"
