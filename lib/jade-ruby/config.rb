@@ -5,8 +5,8 @@ module Jade
   #
   # Defines Jade compiler configuration.
   #
-  # The documentation for Jade compiler can be found here:
-  # - {http://web.archive.org/web/20160404025722/http://jade-lang.com/api/}
+  # The documentation for Jade configuration options can be found here:
+  # - {http://web.archive.org/web/*/jade-lang.com/api}
   # - {https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js}
   #
   class Config < JadePug::Config

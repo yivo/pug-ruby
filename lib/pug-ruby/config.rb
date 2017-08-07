@@ -5,7 +5,7 @@ module Pug
   #
   # Defines Pug compiler configuration.
   #
-  # The documentation for Pug configuration can be found here:
+  # The documentation for Pug configuration options can be found here:
   # - {https://pugjs.org/api/reference.html}
   # - {https://github.com/pugjs/pug-cli/blob/master/index.js}
   #
