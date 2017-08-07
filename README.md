@@ -9,7 +9,7 @@
 
 ## About
 
-This gem is a wrapper for Jade / Pug template engines.
+This gem allows to invoke Jade / Pug from the Ruby code.
 
 **You can compile both Jade and Pug:**
 * supports Jade [1.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
@@ -42,15 +42,15 @@ Jade.compile "div=greeting", locals: { greeting: "Hello, Jade!" } # => "<div>Hel
 Jade.compile "div=greeting", client: true                         # => "(function(jade) { function template(locals) {var buf = [];var jade_mixins = {};var jade_interp;;var locals_for_with = (locals || {});(function (greeting) {buf.push("<div>" + (jade.escape(null == (jade_interp = greeting) ? "" : jade_interp)) + "</div>");}.call(this,"greeting" in locals_for_with?locals_for_with.greeting:typeof greeting!=="undefined"?greeting:undefined));;return buf.join("");}; return template; }).call(this, jade);"
 ```
  
-**Advanced language features like `include`, `extends` and `block` are available:**
+**Advanced language features like `include`, `extends` and `block` are supported (only system compilers):**
 ```jade
-//- /var/www/app/views/header.jade
+//- File: /var/www/app/views/header.jade
 ul
   li: a(href='/') Home
 ```
 
 ```jade
-//- /var/www/app/views/layout.jade
+//- File: /var/www/app/views/layout.jade
 doctype html
 html
   head
