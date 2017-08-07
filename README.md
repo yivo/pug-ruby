@@ -22,14 +22,14 @@ Pug.compile(source, options)
 
 **RubyGems users**
 
-1. Run `gem install pug-ruby --version "~> 2.0"`. 
+1. Run `gem install pug-ruby --version "~> 2.0.0"`. 
 2. Add `require "pug-ruby"` to your code.
 
 **Bundler users**
 
 1. Add to your Gemfile:
 ```ruby
-gem "pug-ruby", "~> 1.0"
+gem "pug-ruby", "~> 2.0.0"
 ```
 2. Run `bundle install`.
 
