@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual testing</title>
+  <script src="../vendor/jade-1.11.0.min.js"></script>
+  <script src="../vendor/pug-2.0.0-rc.3.min.js"></script>
+  <script>
+    console.log( jade.compile('div Hello, Jade!')() );
+    console.log( jade.compile('div=greeting')({ greeting: 'Hello, Jade!' }) );
+    console.log( jade.compileClient('div Hello, Jade!', { client: true }) );
+
+    console.log( pug.compile('div Hello, Pug!')() );
+    console.log( pug.compile('div=greeting')({ greeting: 'Hello, Pug!' }) );
+    console.log( pug.compileClient('div Hello, Pug!', { client: true }) );
+  </script>
+</head>
+<body>
+
+</body>
+</html>
