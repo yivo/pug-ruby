@@ -77,15 +77,16 @@ Jade.use "1.9.2" do
   # Do you stuff.
 end
 
-# You have just switched back to the 1.11.0.
+# You have been switched back to the 1.11.0.
 Jade.compiler.version # Returns "1.11.0".
 ```
 
 **Switching to the system Jade / Pug:**
 
 ```ruby
-# Pass :system to switch to the system Pug.
-Pug.use :system
+# Pass :system to switch to the system Jade / Pug.
+Jade.use :system
+Pug.use  :system
 ```
 
 **Shipped versions of Jade:**
@@ -159,7 +160,7 @@ Pug.use :system
 * 2.0.0-beta9
 * 2.0.0-beta10
 * 2.0.0-beta11
-* 2.0.0-beta.12 (this is not an error)
+* 2.0.0-beta.12 (the dot is not an error)
 * 2.0.0-rc.1
 * 2.0.0-rc.2
 * 2.0.0-rc.3
@@ -170,22 +171,52 @@ Pug.use :system
 * 2.0.1
 * 2.0.2
 
-## Configuring Jade and Pug
+## Configuring Jade / Pug
 
-Access Pug and Jade configurations:
+Accessing configuration:
 ```ruby
-Jade.config.pretty = true
-Pug.config.pretty  = true
+Jade.config
 ```
 
-Refer to official website for configuration options: 
+Getting configuration options:
+```ruby
+Jade.config.pretty  # => false
+Jade.config.pretty? # => false
+```
 
-[jade-lang.com (Sorry, Web Archive only)](http://web.archive.org/web/*/jade-lang.com)
+Setting configuration options:
+```ruby
+Jade.config.pretty = true
+```
 
-[pugjs.org](https://pugjs.org)
+Setting custom configuration options:
+```ruby
+Jade.config.custom_option = "value"
+```
+
+Serializing configuration:
+```ruby
+Jade.config.to_h
+  # => { filename: nil, doctype: nil, pretty: false, self: false, compile_debug: false, globals: [], name: "template" }
+```
+
+The documentation for configuration options can be found here:
+* [Official Jade website (Web Archive only)](http://web.archive.org/web/*/jade-lang.com/api)
+* [Jade CLI utility reference](https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js)
+* [Official Pug website](https://pugjs.org/api/reference.html)
+* [Pug CLI utility reference](https://github.com/pugjs/pug-cli/blob/master/index.js)
+
+Pass an options to `Jade#compile` or `Pug#compile` as second argument to override global config:
+```ruby
+Jade.compile "h1 Title\ndiv Content"
+  # => "<h1>Title</h1><div>Content</div>"
+  
+Jade.compile "h1 Title\ndiv Content", pretty: true
+  # => "<h1>Title</h1>\n<div>Content</div>"  
+```
 
 ## Running tests
 
-1. Install both Jade and Pug: `npm install --global jade pug-cli`.
+1. Install both Jade and Pug: `npm install --global jade pug`.
 2. Install gem dependencies: `bundle install`.
 3. Finally, run tests: `bundle exec rake test`.
