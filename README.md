@@ -13,10 +13,10 @@ This gem is a wrapper for Jade / Pug template engines.
 
 **You can compile both Jade and Pug:**
 * supports Jade [1.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
-* supports Pug [2.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
+* supports Pug [2.x.x](https://github.com/pugjs/pug/tree/master).
  
 **You can choose what compiler to use:**
-* *system compiler* – compiler that installed globally via NPM.
+* *system compiler* – compiler that is installed globally via NPM.
 * *shipped compiler* – compiler that is shipped with the gem as Web version.
  
 Available versions of shipped compilers are listed below.
@@ -42,6 +42,31 @@ Jade.compile "div=greeting", locals: { greeting: "Hello, Jade!" } # => "<div>Hel
 Jade.compile "div=greeting", client: true                         # => "(function(jade) { function template(locals) {var buf = [];var jade_mixins = {};var jade_interp;;var locals_for_with = (locals || {});(function (greeting) {buf.push("<div>" + (jade.escape(null == (jade_interp = greeting) ? "" : jade_interp)) + "</div>");}.call(this,"greeting" in locals_for_with?locals_for_with.greeting:typeof greeting!=="undefined"?greeting:undefined));;return buf.join("");}; return template; }).call(this, jade);"
 ```
  
+**Advanced language features like `include`, `extends` and `block` are available:**
+```jade
+//- /var/www/app/views/header.jade
+ul
+  li: a(href='/') Home
+```
+
+```jade
+//- /var/www/app/views/layout.jade
+doctype html
+html
+  head
+      title Application
+  body
+    header
+      include ./header.jade
+```
+
+```ruby
+Jade.use :system
+
+Jade.compile File.read("/var/www/app/views/layout.jade"), filename: "/var/www/app/views/layout.jade"
+  # => "<!DOCTYPE html><html><head><title>Application</title></head><body><header><ul><li><a href="/">Home</a></li></ul></header></body></html>"
+```
+
 ## Installing gem
 
 **RubyGems users**
