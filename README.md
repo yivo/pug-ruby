@@ -12,16 +12,19 @@
 This gem allows to invoke Jade / Pug from the Ruby code.
 
 **You can compile both Jade and Pug:**
+
 * supports Jade [1.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
 * supports Pug [2.x.x](https://github.com/pugjs/pug/tree/master).
  
 **You can choose what compiler to use:**
+
 * *system compiler* – compiler that is installed globally via NPM.
 * *shipped compiler* – compiler that is shipped with the gem as Web version.
  
 Available versions of shipped compilers are listed below.
  
-**You can lock the Jade / Pug version:** 
+**You can lock the Jade / Pug version:**
+
 ```ruby
 NEEDED_JADE_VERSION = "1.9.2"
 
@@ -31,12 +34,14 @@ end
 ```
 
 **You can configure globally or per compilation:**
+
 ```ruby
 Jade.config.pretty = true
 Jade.compile "div Hello, Jade!", pretty: false
 ```
 
 **You can render template or compile it to the JavaScript function:**
+
 ```ruby
 Jade.compile "div=greeting", locals: { greeting: "Hello, Jade!" } # => "<div>Hello, Jade!</div>"
 Jade.compile "div=greeting", client: true                         # => "(function(jade) { function template(locals) {var buf = [];var jade_mixins = {};var jade_interp;;var locals_for_with = (locals || {});(function (greeting) {buf.push("<div>" + (jade.escape(null == (jade_interp = greeting) ? "" : jade_interp)) + "</div>");}.call(this,"greeting" in locals_for_with?locals_for_with.greeting:typeof greeting!=="undefined"?greeting:undefined));;return buf.join("");}; return template; }).call(this, jade);"
@@ -107,6 +112,7 @@ You will not be able to use that features while dealing with shipped Jade / Pug.
 Use system Jade / Pug in such cases.
 
 **Switching the version permanently:**
+
 ```ruby
 Pug.use "2.0.0"      # You have just switched to shipped Pug 2.0.0.
 Pug.compiler.version # Returns "2.0.0".
@@ -116,6 +122,7 @@ Pug.compiler.version # Returns the version of your system-wide installed Pug.
 ```
 
 **Switching the version temporarily:**
+
 ```ruby
 Jade.use "1.11.0" # You have just switched to shipped Jade 1.11.0.
 
@@ -223,39 +230,46 @@ Pug.use  :system
 ## Configuring Jade / Pug
 
 **Accessing configuration:**
+
 ```ruby
 Jade.config
 ```
 
 **Getting configuration options:**
+
 ```ruby
 Jade.config.pretty  # => false
 Jade.config.pretty? # => false
 ```
 
 **Setting configuration options:**
+
 ```ruby
 Jade.config.pretty = true
 ```
 
 **Setting custom configuration options:**
+
 ```ruby
 Jade.config.custom_option = "value"
 ```
 
 **Serializing configuration:**
+
 ```ruby
 Jade.config.to_h
   # => { filename: nil, doctype: nil, pretty: false, self: false, compile_debug: false, globals: [], name: "template" }
 ```
 
 **The documentation for configuration options can be found here:**
+
 * [Official Jade website (Web Archive only)](http://web.archive.org/web/*/jade-lang.com/api)
 * [Jade CLI utility reference](https://github.com/pugjs/pug/blob/v1.x.x/bin/jade.js)
 * [Official Pug website](https://pugjs.org/api/reference.html)
 * [Pug CLI utility reference](https://github.com/pugjs/pug-cli/blob/master/index.js)
 
 **Pass an options to `Jade#compile` or `Pug#compile` as second argument to override global config:**
+
 ```ruby
 Jade.compile "h1 Title\ndiv Content"
   # => "<h1>Title</h1><div>Content</div>"
