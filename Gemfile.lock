@@ -23,6 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (~> 1.7)
   pug-ruby!
   rake (~> 10.0)
   test-unit (~> 3.1)
