@@ -10,14 +10,38 @@
 ## About
 
 This gem is a wrapper for Jade / Pug template engines.
- 
-You can compile both Jade templates ([version 1.x](https://github.com/pugjs/pug/tree/v1.x.x)) and Pug ([version 2.x](https://github.com/pugjs/pug)).
 
+**You can compile both Jade and Pug:**
+* supports Jade [1.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
+* supports Pug [2.x.x](https://github.com/pugjs/pug/tree/v1.x.x).
+ 
+**You can choose what compiler to use:**
+* *system compiler* – compiler that installed globally via NPM.
+* *shipped compiler* – compiler that is shipped with the gem as Web version.
+ 
+Available versions of shipped compilers are listed below.
+ 
+**You can lock the Jade / Pug version:** 
 ```ruby
-Jade.compile(source, options)
-Pug.compile(source, options)
+NEEDED_JADE_VERSION = "1.9.2"
+
+unless Jade.compiler.version == NEEDED_JADE_VERSION
+  raise "Jade #{NEEDED_JADE_VERSION} needed. You have #{Jade.compiler.version}."
+end
 ```
 
+**You can configure globally or per compilation:**
+```ruby
+Jade.config.pretty = true
+Jade.compile "div Hello, Jade!", pretty: false
+```
+
+**You can render template or compile it to the JavaScript function:**
+```ruby
+Jade.compile "div=greeting", locals: { greeting: "Hello, Jade!" } # => "<div>Hello, Jade!</div>"
+Jade.compile "div=greeting", client: true                         # => "(function(jade) { function template(locals) {var buf = [];var jade_mixins = {};var jade_interp;;var locals_for_with = (locals || {});(function (greeting) {buf.push("<div>" + (jade.escape(null == (jade_interp = greeting) ? "" : jade_interp)) + "</div>");}.call(this,"greeting" in locals_for_with?locals_for_with.greeting:typeof greeting!=="undefined"?greeting:undefined));;return buf.join("");}; return template; }).call(this, jade);"
+```
+ 
 ## Installing gem
 
 **RubyGems users**
