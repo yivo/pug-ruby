@@ -55,7 +55,7 @@ namespace "javascripts" do
         build_template_runtime  :jade, "tmp/jade-#{version}", version, "vendor/jade-runtime-#{version}.js"
         copy_license_file       :jade, "tmp/jade-#{version}", version, "vendor/jade-runtime-#{version}-license"
 
-      elsif tag.match?(/\A(?:pug@|2)/) && !tag.match?(/\balpha\b/)
+      elsif tag.match?(/\A(?:pug@|2)/) && !tag.match?(/alpha/)
         version = tag.gsub(/\Apug@/, "")
         clone_repository        "https://github.com/pugjs/pug.git", tag, "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}"
