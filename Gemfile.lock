@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pug-ruby (2.0.0)
+    pug-ruby (2.0.0.rc2)
       execjs (~> 2.0)
       memoist (~> 0.15)
       method-not-implemented (~> 1.0, >= 1.0.1)
