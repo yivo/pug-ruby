@@ -173,7 +173,7 @@ module JadePugTest
 
   def test_version_list
     assert_equal engine == Jade ? "1.0.0"  : "2.0.0-beta1", engine.versions.first
-    assert_equal engine == Jade ? "1.11.0" : "2.0.0-rc.3",  engine.versions.last
+    assert_equal engine == Jade ? "1.11.0" : "2.0.0-rc.4",  engine.versions.last
   end
 
   def test_runtime_version_list
