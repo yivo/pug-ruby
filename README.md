@@ -220,6 +220,7 @@ Pug.use  :system
 * 2.0.0-rc.1
 * 2.0.0-rc.2
 * 2.0.0-rc.3
+* 2.0.0-rc.4
 
 **Shipped versions of Pug runtime:**
 
