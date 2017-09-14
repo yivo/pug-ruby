@@ -57,6 +57,12 @@ namespace "javascripts" do
 
       elsif tag.match?(/\A(?:pug@|2)/) && !tag.match?(/alpha/)
         version = tag.gsub(/\Apug@/, "")
+
+        # Try to remove an extra dot in versions like "2.0.0-beta.12".
+        # This is just a typo:                                   ^
+        # I try to fix it so user will not be confused why some beta versions
+        # are named like "2.0.0-beta.12" and others like "2.0.0-beta5".
+        version = version.gsub(/\A(2\.0\.0-beta)\.(\d+)\z/, "\\1\\2")
         clone_repository        "https://github.com/pugjs/pug.git", tag, "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}"
         install_node_modules    "tmp/pug-#{version}/packages/pug"

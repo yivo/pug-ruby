@@ -216,7 +216,7 @@ Pug.use  :system
 * 2.0.0-beta9
 * 2.0.0-beta10
 * 2.0.0-beta11
-* 2.0.0-beta.12 (the dot is not an error)
+* 2.0.0-beta12
 * 2.0.0-rc.1
 * 2.0.0-rc.2
 * 2.0.0-rc.3
