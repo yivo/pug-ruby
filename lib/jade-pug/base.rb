@@ -76,7 +76,7 @@ module JadePug
   end
 
   #
-  # Returns the list of all available engine compiler versions shipped with gem.
+  # Returns the list of all available engine compiler versions shipped with the gem.
   #
   # @return [Array<String>]
   def versions
@@ -88,7 +88,7 @@ module JadePug
   memoize :versions
 
   #
-  # Returns the list of all available engine runtime versions shipped with gem.
+  # Returns the list of all available engine runtime versions shipped with the gem.
   #
   # @return [Array<String>]
   def runtime_versions
