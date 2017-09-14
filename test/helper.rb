@@ -8,6 +8,8 @@ require "regexp-match-polyfill"
 Jade.silence = true
 Pug.silence  = true
 
+Test::Unit::TestCase.test_order = :random
+
 module JadePugTestHelpers
   def engine
     Object.const_get self.class.name.gsub(/Test\z/, "")
