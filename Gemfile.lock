@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pug-ruby (2.0.0.rc2)
+    pug-ruby (2.0.0.rc3)
       execjs (~> 2.0)
       memoist (~> 0.15)
       method-not-implemented (~> 1.0, >= 1.0.1)
@@ -13,7 +13,7 @@ GEM
     execjs (2.7.0)
     memoist (0.16.0)
     method-not-implemented (1.0.1)
-    power_assert (1.0.2)
+    power_assert (1.1.0)
     rake (10.5.0)
     regexp-match-polyfill (1.0.2)
     test-unit (3.2.5)
@@ -29,4 +29,4 @@ DEPENDENCIES
   test-unit (~> 3.1)
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
