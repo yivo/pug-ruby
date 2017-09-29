@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version         = PUG_RUBY_GEM_VERSION
   s.author          = "Yaroslav Konoplov"
   s.email           = "eahome00@gmail.com"
-  s.summary         = "Ruby wrapper for the Jade / Pug template engine."
-  s.description     = "Ruby wrapper for the Jade / Pug template engine."
+  s.summary         = "Compile Jade and Pug from Ruby."
+  s.description     = "pug-ruby is a gem that allows you to easily compile Jade and Pug templates from Ruby."
   s.homepage        = "https://github.com/yivo/pug-ruby"
   s.license         = "MIT"
 

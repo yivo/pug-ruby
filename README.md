@@ -1,4 +1,4 @@
-## Ruby wrapper for the Jade and Pug
+## Compile Jade and Pug from Ruby
 
 [![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
 [![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
@@ -9,7 +9,7 @@
 
 ## About
 
-This gem allows to invoke Jade / Pug from the Ruby code.
+`pug-ruby` is a gem that allows you to easily compile Jade and Pug templates from Ruby.
 
 **You can compile both Jade and Pug:**
 
