@@ -111,7 +111,7 @@ You may require `sudo` depending on your system.
 
 The gem is shipped with different prebuilt versions of Jade and Pug.
 That prebuilt versions are Web version, e.g. they are limited to browser JavaScript.
-Advanced Jade / Pug features like `includes`, `extends`, `block`, and other require filesystem access.
+Advanced Jade / Pug features like `includes`, `extends`, `block`, and others require filesystem access.
 You will not be able to use that features while dealing with shipped Jade / Pug.
 Use system Jade / Pug in such cases.
 
