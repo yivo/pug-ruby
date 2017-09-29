@@ -1,4 +1,4 @@
-## Compile Jade and Pug from Ruby
+## 🐶 Compile Jade and Pug from Ruby
 
 [![Gem Version](https://badge.fury.io/rb/pug-ruby.svg)](https://badge.fury.io/rb/pug-ruby)
 [![Build Status](https://travis-ci.org/yivo/pug-ruby.svg?branch=master)](https://travis-ci.org/yivo/pug-ruby)
@@ -89,6 +89,8 @@ gem "pug-ruby", "~> 2.0.0"
 
 ## Installing Jade
 
+Only install if you want to use **system** compiler.
+
 Install Jade globally via npm:
 ```bash
 npm install --global jade
@@ -96,6 +98,8 @@ npm install --global jade
 You may require `sudo` depending on your system.
 
 ## Installing Pug
+
+Only install if you want to use **system** compiler.
 
 Install Pug globally via npm:
 ```bash
