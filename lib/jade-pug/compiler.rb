@@ -93,7 +93,8 @@ module JadePug
     # @return [Hash]
     def prepare_options(options)
       options = engine.config.to_hash.merge(options)
-      options.each_key { |k| options[k.to_s.gsub(/_([a-z])/) { $1.upcase }.to_sym] = options[k] }
+      # rubocop:disable Performance/HashEachMethods
+      options.keys.each { |k| options[k.to_s.gsub(/_([a-z])/) { $1.upcase }.to_sym] = options[k] }
       options.delete_if { |k, v| v.nil? }
     end
 
