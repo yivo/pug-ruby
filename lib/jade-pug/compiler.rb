@@ -93,7 +93,7 @@ module JadePug
     # @return [Hash]
     def prepare_options(options)
       options = engine.config.to_hash.merge(options)
-      options.keys.each { |k, v| options[k.to_s.gsub(/_([a-z])/) { $1.upcase }.to_sym] = options[k] }
+      options.each_key { |k| options[k.to_s.gsub(/_([a-z])/) { $1.upcase }.to_sym] = options[k] }
       options.delete_if { |k, v| v.nil? }
     end
 
@@ -123,13 +123,13 @@ module JadePug
 
       <<-JAVASCRIPT
         (function() {
-          var engine   = #{npm_package_require_snippet};
+          var engine   = #{ npm_package_require_snippet };
           var template = engine[#{ JSON.dump(method) }].apply(engine, #{ JSON.dump(arguments) });
-            
+
           if (typeof template === 'function') {
             template = template(#{ JSON.dump(locals) });
           }
-        
+
           if (typeof console === 'object' && console !== null && typeof console.log === 'function') {
             console.log(template);
           }

@@ -15,7 +15,7 @@ module Jade
     # @return [String]
     def process_result(source, result, options)
       if options[:client]
-        "(function(jade) { #{super}; return #{options[:name]}; }).call(this, jade);"
+        "(function(jade) { #{ super }; return #{ options[:name] }; }).call(this, jade);"
       else
         super
       end

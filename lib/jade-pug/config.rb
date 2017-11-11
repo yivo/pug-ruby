@@ -19,11 +19,11 @@ module JadePug
 
           # config.client?
           if name =~ /\A(\w+)\?\z/
-            !!(respond_to?($1) ? send($1) : instance_variable_get("@#{$1}"))
+            !!(respond_to?($1) ? send($1) : instance_variable_get("@#{ $1 }"))
 
           # config.client
           elsif name =~ /\A(\w+)\z/
-            instance_variable_get("@#{$1}")
+            instance_variable_get("@#{ $1 }")
 
           else
             super
@@ -32,7 +32,7 @@ module JadePug
         when 1
           # config.client=
           if name =~ /\A(\w+)=\z/
-            instance_variable_set("@#{$1}", args.first)
+            instance_variable_set("@#{ $1 }", args.first)
           else
             super
           end

@@ -1,12 +1,11 @@
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-Metrics/LineLength:
-  Enabled: false
-  Max: 110
-
-Style/FileName:
+Naming/FileName:
   Regex: !ruby/regexp /\A[-a-z0-9]+\z/
+
+Style/Encoding:
+  Enabled: false
 
 Layout/CaseIndentation:
   EnforcedStyle: end
@@ -15,40 +14,45 @@ Layout/CaseIndentation:
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
 
-Layout/SpaceInsideArrayPercentLiteral:
+Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
-Layout/EmptyLinesAroundClassBody:
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
   Enabled: false
 
 Style/PerlBackrefs:
   Enabled: false
 
-Bundler/OrderedGems:
+Metrics/BlockLength:
   Enabled: false
 
-Metrics/BlockLength:
+Metrics/LineLength:
+  Enabled: true
+  Max:     120
+  Exclude:
+    - Rakefile
+    - test/**/*
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Bundler/OrderedGems:
   Enabled: false
 
 Style/EmptyMethod:
   Enabled: false
 
-Lint/UselessAssignment:
+Style/GuardClause:
   Enabled: false
-
-Lint/EndAlignment:
-  EnforcedStyleAlignWith: variable
-
-Lint/UnusedBlockArgument:
-  Enabled: false
-
-Metrics/MethodLength:
-  Max: 20
-
-Layout/ExtraSpacing:
-  Enabled:                 false
-  AllowForAlignment:       true
-  ForceEqualSignAlignment: true
 
 Style/PercentLiteralDelimiters:
  PreferredDelimiters:
@@ -57,9 +61,15 @@ Style/PercentLiteralDelimiters:
    '%':     '{}'
 
 Layout/AlignParameters:
-  Enabled: false
+  EnforcedStyle: with_fixed_indentation
 
 Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UselessAssignment:
   Enabled: false
 
 Style/StringLiteralsInInterpolation:
@@ -79,3 +89,9 @@ Style/DoubleNegation:
 
 Style/CaseEquality:
   Enabled: false
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Layout/SpaceInsideStringInterpolation:
+  EnforcedStyle: space

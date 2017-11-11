@@ -26,7 +26,7 @@ module JadePug
       source  = prepare_source(source)
       options = prepare_options(options)
       snippet = compilation_snippet \
-        method:    "compile#{"Client" if options[:client]}",
+        method:    "compile#{ "Client" if options[:client] }",
         arguments: [source, options],
         locals:    options.fetch(:locals, {}),
         options:   options
@@ -43,7 +43,7 @@ module JadePug
     #
     # @return [String]
     def path_to_compiler_source
-      File.expand_path("../../../vendor/#{engine.name.downcase}-#{version}.min.js", __FILE__)
+      File.expand_path("../../../vendor/#{ engine.name.downcase }-#{ version }.min.js", __FILE__)
     end
 
     #
@@ -53,7 +53,7 @@ module JadePug
     # @return [String]
     def read_compiler_source(path)
       unless File.readable?(path)
-        raise engine::CompilerError, "Couldn't read compiler source: #{path}"
+        raise engine::CompilerError, "Couldn't read compiler source: #{ path }"
       end
       File.read(path)
     end
@@ -65,7 +65,7 @@ module JadePug
     # @return [ExecJS::Runtime]
     def compile_compiler_source(source)
       ExecJS.compile(source).tap do |compiler|
-        raise engine::CompilerError, "Failed to compile #{engine.name} compiler" unless compiler
+        raise engine::CompilerError, "Failed to compile #{ engine.name } compiler" unless compiler
       end
     end
 

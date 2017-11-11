@@ -20,11 +20,11 @@ module JadePugTestHelpers
   end
 
   def ext
-    ".#{engine.name.downcase}"
+    ".#{ engine.name.downcase }"
   end
 
   def expand_path(relative_path)
-    File.expand_path(File.join("../#{engine.name.downcase}", relative_path), __FILE__)
+    File.expand_path(File.join("../#{ engine.name.downcase }", relative_path), __FILE__)
   end
 
   def assert_match_doctype(string)
@@ -61,47 +61,47 @@ module JadePugTest
       versions = [:system] if ENV["QUICK"]
 
       versions.each do |version|
-        test "compilation_#{version}" do
+        test "compilation_#{ version }" do
           engine.use version
           result = engine.compile("div Hello, world!")
           assert_no_match_template_function(result)
           assert_no_match_doctype(result)
         end
 
-        test "compilation_with_doctype_#{version}" do
+        test "compilation_with_doctype_#{ version }" do
           engine.use version
-          result = engine.compile(File.read(expand_path("index#{ext}")))
+          result = engine.compile(File.read(expand_path("index#{ ext }")))
           assert_no_match_template_function(result)
           assert_match_doctype(result)
         end
 
-        test "compilation_with_io_#{version}" do
+        test "compilation_with_io_#{ version }" do
           engine.use version
           template = "div\n  | Hello, world!"
           io       = StringIO.new(template)
           assert_equal(engine.compile(template), engine.compile(io))
         end
 
-        test "compilation_with_syntax_error_#{version}" do
+        test "compilation_with_syntax_error_#{ version }" do
           engine.use version
           assert_raise(engine::CompilationError) { engine.compile("else\n  div") }
         end
 
-        test "client_compilation_#{version}" do
+        test "client_compilation_#{ version }" do
           engine.use version
           result = engine.compile("div Hello, world!", client: true)
           assert_match_template_function(result)
           assert_no_match_doctype(result)
         end
 
-        test "client_compilation_with_doctype_#{version}" do
+        test "client_compilation_with_doctype_#{ version }" do
           engine.use version
-          result = engine.compile(File.read(expand_path("index#{ext}")), client: true)
+          result = engine.compile(File.read(expand_path("index#{ ext }")), client: true)
           assert_match_template_function(result)
           assert_match_doctype(result)
         end
 
-        test "compilation_with_locals_#{version}" do
+        test "compilation_with_locals_#{ version }" do
           engine.use version
           template = "div=greeting"
           result   = engine.compile(template, locals: { greeting: "Hello, world!" })
@@ -110,7 +110,7 @@ module JadePugTest
           assert_no_match(/greeting/, result)
         end
 
-        test "client_compilation_with_locals_#{version}" do
+        test "client_compilation_with_locals_#{ version }" do
           engine.use version
           template = "div=greeting"
           result   = engine.compile(template, locals: { greeting: "Hello, world!" }, client: true)
@@ -119,12 +119,12 @@ module JadePugTest
           assert_match("greeting", result)
         end
 
-        test "switch_version_permanently_#{version}" do
+        test "switch_version_permanently_#{ version }" do
           engine.use version
           assert_equal(version == :system ? engine.versions.last : version, engine.compiler.version)
         end
 
-        test "switch_version_temporarily_#{version}" do
+        test "switch_version_temporarily_#{ version }" do
           was     = engine.compiler.system? ? :system : engine.compiler.version
           @called = false
           engine.use(version) { @called = true }
@@ -137,7 +137,7 @@ module JadePugTest
 
   def test_compilation_with_includes
     engine.use :system
-    file     = expand_path("includes/index#{ext}")
+    file     = expand_path("includes/index#{ ext }")
     template = File.read(file)
     result   = engine.compile(template, filename: file)
     assert_no_match_template_function(result)
@@ -146,7 +146,7 @@ module JadePugTest
 
   def test_compilation_with_extends
     engine.use :system
-    file     = expand_path("extends/index#{ext}")
+    file     = expand_path("extends/index#{ ext }")
     template = File.read(file)
     result   = engine.compile(template, filename: file)
     assert_no_match_template_function(result)
@@ -155,7 +155,7 @@ module JadePugTest
 
   def test_client_compilation_with_includes
     engine.use :system
-    file     = expand_path("includes/index#{ext}")
+    file     = expand_path("includes/index#{ ext }")
     template = File.read(file)
     result   = engine.compile(template, filename: file, client: true)
     assert_match_template_function(result)
@@ -164,7 +164,7 @@ module JadePugTest
 
   def test_client_compilation_with_extends
     engine.use :system
-    file     = expand_path("extends/index#{ext}")
+    file     = expand_path("extends/index#{ ext }")
     template = File.read(file)
     result   = engine.compile(template, filename: file, client: true)
     assert_match_template_function(result)
@@ -182,7 +182,7 @@ module JadePugTest
   end
 
   def test_config_serialization
-    [:filename, :doctype, :pretty].each do |option|
+    %i[filename doctype pretty].each do |option|
       assert_include engine.config.to_h.keys, option
     end
   end

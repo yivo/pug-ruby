@@ -17,7 +17,7 @@ module JadePug
       check_node_runtime!
       check_npm_package!
 
-      engine.echo "Resolved system #{engine.name} to #{version}."
+      engine.echo "Resolved system #{ engine.name } to #{ version }."
     end
 
     #
@@ -31,7 +31,7 @@ module JadePug
       options = prepare_options(options)
       command = ["node", "--eval"]
       command.push compilation_snippet \
-        method:    "compile#{"Client" if options[:client]}",
+        method:    "compile#{ "Client" if options[:client] }",
         arguments: [source, options],
         locals:    options.fetch(:locals, {}),
         options:   options
@@ -52,7 +52,7 @@ module JadePug
         stdout.strip
       else
         raise engine::CompilerError, \
-          %{Failed to get #{engine.name} version. Perhaps, the problem with Node.js runtime.}
+          %{Failed to get #{ engine.name } version. Perhaps, the problem with Node.js runtime.}
       end
     end
     memoize :version
@@ -110,7 +110,7 @@ module JadePug
 
       if exit_status.success?
         @node_version = stdout.strip.gsub(/\Av/, "")
-        engine.echo "Using Node.js runtime #{@node_version}."
+        engine.echo "Using Node.js runtime #{ @node_version }."
       else
         raise engine::CompilerError, %{No Node.js runtime has been found in your system.}
       end
@@ -129,8 +129,8 @@ module JadePug
 
       unless exit_status.success?
         raise engine::CompilerError, \
-          %{No #{engine.name} NPM package has been found in your system. } +
-          %{Have you forgotten to "npm install --global #{npm_package_name}"?}
+          %{No #{ engine.name } NPM package has been found in your system. } +
+          %{Have you forgotten to "npm install --global #{ npm_package_name }"?}
       end
       nil
     end

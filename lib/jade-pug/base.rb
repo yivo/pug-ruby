@@ -3,6 +3,7 @@
 
 require "memoist"
 
+# :nodoc:
 module JadePug
   extend Memoist
 
@@ -23,7 +24,7 @@ module JadePug
   # @param wanted_version [String, :system]
   # @return [JadePug::Compiler]
   def compiler(wanted_version = version)
-    (@compilers ||= {})["#{name}-#{wanted_version}"] ||= begin
+    (@compilers ||= {})["#{ name }-#{ wanted_version }"] ||= begin
       case wanted_version
         when :system then self::SystemCompiler.new
         else              self::ShippedCompiler.new(wanted_version)
@@ -67,9 +68,9 @@ module JadePug
   def did_switch_version(version_from, version_to)
     if version_from != version_to
       if Symbol === version_to
-        echo "Using #{version_to} #{name}."
+        echo "Using #{ version_to } #{ name }."
       else
-        echo "Using #{name} #{version_to}. NOTE: Advanced features like includes, extends and blocks will not work."
+        echo "Using #{ name } #{ version_to }. NOTE: Advanced features like includes, extends and blocks will not work."
       end
     end
     nil
@@ -80,7 +81,7 @@ module JadePug
   #
   # @return [Array<String>]
   def versions
-    sort_versions(Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
+    sort_versions(Dir[File.expand_path("../../../vendor/#{ name.downcase }-*.js", __FILE__)].map do |path|
       match = File.basename(path).match(/\A#{name.downcase}-(?!runtime-)(?<v>.+)\.min\.js\z/)
       match[:v] if match
     end.compact)
@@ -92,7 +93,7 @@ module JadePug
   #
   # @return [Array<String>]
   def runtime_versions
-    sort_versions(Dir[File.expand_path("../../../vendor/#{name.downcase}-*.js", __FILE__)].map do |path|
+    sort_versions(Dir[File.expand_path("../../../vendor/#{ name.downcase }-*.js", __FILE__)].map do |path|
       match = File.basename(path).match(/\A#{name.downcase}-runtime-(?<v>.+)\.js\z/)
       match[:v] if match
     end.compact)
