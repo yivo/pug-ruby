@@ -1,6 +1,5 @@
 *.gem
 .bundle
-.ruby-version
 pkg/
 tmp/
 /.idea/
