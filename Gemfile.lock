@@ -12,8 +12,11 @@ GEM
   specs:
     ast (2.3.0)
     execjs (2.7.0)
+    libv8 (5.9.211.38.1)
     memoist (0.16.0)
     method-not-implemented (1.0.1)
+    mini_racer (0.1.14)
+      libv8 (~> 5.9)
     parallel (1.12.0)
     parser (2.4.0.0)
       ast (~> 2.2)
@@ -41,6 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.7)
+  mini_racer (~> 0.1)
   pug-ruby!
   rake (~> 10.0)
   rubocop (~> 0.51)
