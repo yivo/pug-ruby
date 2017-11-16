@@ -4,5 +4,5 @@
 require_relative "helper"
 
 class PugTest < Test::Unit::TestCase
-  include JadePugTest
+  include JadePugVersionsTest
 end

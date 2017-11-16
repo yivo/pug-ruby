@@ -52,7 +52,7 @@ module JadePugTestHelpers
   end
 end
 
-module JadePugTest
+module JadePugVersionsTest
   def self.included(base)
     base.class_eval do
       include JadePugTestHelpers
@@ -133,72 +133,5 @@ module JadePugTest
         end
       end
     end
-  end
-
-  def test_compilation_with_includes
-    engine.use :system
-    file     = expand_path("includes/index#{ ext }")
-    template = File.read(file)
-    result   = engine.compile(template, filename: file)
-    assert_no_match_template_function(result)
-    assert_match_doctype(result)
-  end
-
-  def test_compilation_with_extends
-    engine.use :system
-    file     = expand_path("extends/index#{ ext }")
-    template = File.read(file)
-    result   = engine.compile(template, filename: file)
-    assert_no_match_template_function(result)
-    assert_match_doctype(result)
-  end
-
-  def test_client_compilation_with_includes
-    engine.use :system
-    file     = expand_path("includes/index#{ ext }")
-    template = File.read(file)
-    result   = engine.compile(template, filename: file, client: true)
-    assert_match_template_function(result)
-    assert_match_doctype(result)
-  end
-
-  def test_client_compilation_with_extends
-    engine.use :system
-    file     = expand_path("extends/index#{ ext }")
-    template = File.read(file)
-    result   = engine.compile(template, filename: file, client: true)
-    assert_match_template_function(result)
-    assert_match_doctype(result)
-  end
-
-  def test_version_list
-    assert_equal engine == Jade ? "1.0.0"  : "2.0.0-beta1", engine.versions.first
-    assert_equal engine == Jade ? "1.11.0" : "2.0.0-rc.4",  engine.versions.last
-  end
-
-  def test_runtime_version_list
-    assert_equal engine == Jade ? "1.0.0"  : "2.0.0", engine.runtime_versions.first
-    assert_equal engine == Jade ? "1.11.0" : "2.0.2", engine.runtime_versions.last
-  end
-
-  def test_config_serialization
-    %i[filename doctype pretty].each do |option|
-      assert_include engine.config.to_h.keys, option
-    end
-  end
-
-  def test_config_customization
-    engine.config.custom_option = "value"
-    assert_equal "value", engine.config.custom_option
-    assert engine.config.custom_option?
-    assert_include engine.config.to_h.keys, :custom_option
-  end
-
-  def test_get_known_compiler
-    assert engine::ShippedCompiler === engine.compiler(engine.versions.sample)
-  end
-
-  def test_get_unknown_compiler
-    assert_raise(engine::CompilerError) { engine.compiler "0.0.0" }
   end
 end
