@@ -11,8 +11,15 @@ var ENGINE_RUNTIME_INDEX = ENGINE_RUNTIME_DIR + '/lib/runtime.js';
 
 browserify({entries: [ENGINE_RUNTIME_INDEX], standalone: 'jade'})
   .transform('babelify', {
-    presets: ['es2015'],
-    plugins: ['transform-es2015-block-scoping']
+    presets: [['env', {
+      targets: {
+        browsers: ['defaults']
+      },
+      forceAllTransforms: true,
+      useBuiltIns: 'usage',
+      spec: true,
+      debug: true
+    }]]
   })
   .transform('envify')
   .bundle()
