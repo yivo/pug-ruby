@@ -52,9 +52,7 @@ module JadePug
     # @param path [String]
     # @return [String]
     def read_compiler_source(path)
-      unless File.readable?(path)
-        raise engine::CompilerError, "Couldn't read compiler source: #{ path }"
-      end
+      raise engine::CompilerError, "Couldn't read compiler source: #{ path }" unless File.readable?(path)
       File.read(path)
     end
 

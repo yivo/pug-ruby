@@ -17,7 +17,7 @@ browserify({entries: [ENGINE_DIR + '/lib/index.js'], standalone: 'jade'})
       forceAllTransforms: true,
       useBuiltIns: 'usage',
       spec: true,
-      debug: true
+      debug: false
     }]]
   })
   .transform('envify')

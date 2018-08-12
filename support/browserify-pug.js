@@ -23,7 +23,7 @@ browserify({entries: [ENGINE_INDEX], standalone: 'pug'})
       forceAllTransforms: true,
       useBuiltIns: 'usage',
       spec: true,
-      debug: true
+      debug: false
     }]]
   })
   .transform('envify')

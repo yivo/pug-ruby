@@ -18,7 +18,7 @@ browserify({entries: [ENGINE_RUNTIME_INDEX], standalone: 'jade'})
       forceAllTransforms: true,
       useBuiltIns: 'usage',
       spec: true,
-      debug: true
+      debug: false
     }]]
   })
   .transform('envify')
