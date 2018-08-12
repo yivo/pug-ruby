@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pug-ruby (2.0.0)
+    pug-ruby (2.0.1)
       execjs (~> 2.0)
       memoist (~> 0.15)
       method-not-implemented (~> 1.0, >= 1.0.1)
@@ -10,40 +10,42 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    ast (2.3.0)
+    ast (2.4.0)
     execjs (2.7.0)
-    libv8 (5.9.211.38.1)
+    jaro_winkler (1.5.1)
+    libv8 (6.3.292.48.1)
     memoist (0.16.0)
     method-not-implemented (1.0.1)
-    mini_racer (0.1.14)
-      libv8 (~> 5.9)
-    parallel (1.12.0)
-    parser (2.4.0.0)
-      ast (~> 2.2)
-    power_assert (1.1.1)
-    powerpack (0.1.1)
-    rainbow (2.2.2)
-      rake
+    mini_racer (0.2.0)
+      libv8 (>= 6.3)
+    parallel (1.12.1)
+    parser (2.5.1.2)
+      ast (~> 2.4.0)
+    power_assert (1.1.3)
+    powerpack (0.1.2)
+    rainbow (3.0.0)
     rake (10.5.0)
     regexp-match-polyfill (1.0.2)
-    rubocop (0.51.0)
+    rubocop (0.58.2)
+      jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.3.3.1, < 3.0)
+      parser (>= 2.5, != 2.5.1.1)
       powerpack (~> 0.1)
-      rainbow (>= 2.2.2, < 3.0)
+      rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    ruby-progressbar (1.9.0)
-    test-unit (3.2.6)
+    ruby-progressbar (1.10.0)
+    test-unit (3.2.8)
       power_assert
-    unicode-display_width (1.3.0)
-    yard (0.9.9)
+    unicode-display_width (1.4.0)
+    yard (0.9.16)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bundler (~> 1.7)
+  libv8 (~> 6.3.0)
   mini_racer (~> 0.1)
   pug-ruby!
   rake (~> 10.0)
@@ -52,4 +54,4 @@ DEPENDENCIES
   yard (~> 0.9)
 
 BUNDLED WITH
-   1.16.0
+   1.16.2
